@@ -529,7 +529,7 @@ header::after {
   }
   .card img {
     width: 100%;
-    height: 90vh !important;
+    height: 75vh !important;
     -o-object-fit: fill !important;
        object-fit: fill !important;
     display: block;
