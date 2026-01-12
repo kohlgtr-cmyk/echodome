@@ -95,8 +95,7 @@
             z-index: 1;
         }
 
-        /* Efeito hover - traz o card para frente */
-       /* Efeito hover - traz o card para frente mantendo posição */
+   
 .card:nth-child(1):hover {
     transform: translateX(-400px) translateZ(200px) rotateY(0deg) scale(1.15) !important;
     z-index: 100 !important;
@@ -187,25 +186,109 @@
         }
 
         /* Responsivo */
-        @media screen and (max-width: 1200px) {
-            .card:nth-child(1) { transform: translateX(-300px) translateZ(-80px) rotateY(12deg); }
-            .card:nth-child(2) { transform: translateX(-150px) translateZ(-40px) rotateY(6deg); }
-            .card:nth-child(4) { transform: translateX(150px) translateZ(-40px) rotateY(-6deg); }
-            .card:nth-child(5) { transform: translateX(300px) translateZ(-80px) rotateY(-12deg); }
-        }
+ /*     @media screen and (max-width: 1200px) {
+
+  .cards-container {
+    position: relative;
+  }
+
+  .card {
+    transition: 
+      transform 0.4s ease,
+      box-shadow 0.4s ease,
+      top 0.4s ease,
+      left 0.4s ease;
+  }
+
+  .card:hover {
+    position: fixed;
+    transform: scale(1.1);
+    z-index: 9999;
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.8),
+      0 0 60px currentColor;
+  }
+  .card-mobile-lyra:hover {
+    transform: translate(50% 0 0 0);
+  }
+
+
+}*/
+@media screen and (max-width: 1200px) {
+
+  .card-mobile-lyra:hover {
+    position: fixed;
+    z-index: 9999;
+    right: 45%;
+
+    transform: translate(-50%, -50%) translate(5px, 5px) scale(1.1);
+
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.8),
+      0 0 60px currentColor;
+  }
+ .card-mobile-dusk:hover {
+    position: fixed;
+    z-index: 9999;
+    left: 45%;
+
+    transform: translate(-50%, -50%) translate(5px, 5px) scale(1.1);
+
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.8),
+      0 0 60px currentColor;
+  }
+
+}
+
+    
 
         @media screen and (max-width: 768px) {
+
+            .card-mobile-lyra:hover {
+    position: fixed;
+    z-index: 9999;
+
+    transform: translate(-50%, -50%) translate(5px, 5px) scale(1.1);
+
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.8),
+      0 0 60px currentColor;
+  }
+ .card-mobile-dusk:hover {
+    position: fixed;
+    z-index: 9999;
+    transform: translate(-50%, -50%) translate(5px, 5px) scale(1.1);
+
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.8),
+      0 0 60px currentColor;
+  }
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card.dusk   { order: 5; }
+  .card.trace  { order: 1; }
+  .card.od     { order: 2; }
+  .card.ember  { order: 3; }
+  .card.lyra   { order: 4; }
             .cards-container {
                 flex-direction: column;
                 perspective: none;
                 min-height: initial;
                 gap: 30px;
             }
-
+            .card-inner {
+                height: auto;
+            }
             .card {
                 position: relative !important;
                 transform: none !important;
                 margin: 0 auto;
+                height: auto;
+                max-width: 90%;
             }
 
             .card:hover {
@@ -216,7 +299,23 @@
                 font-size: 2rem;
                 margin-bottom: 30px;
             }
+        .card:nth-child(1):hover,
+    .card:nth-child(2):hover,
+    .card:nth-child(3):hover,
+    .card:nth-child(4):hover,
+    .card:nth-child(5):hover {
+        transform: scale(1.05) !important;
+    }
+     .card img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.6s;
         }
+    
+        }
+
 
         /* Indicador de clique */
         .card::before {
@@ -224,7 +323,6 @@
             position: absolute;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8);
             color: white;
             padding: 8px 16px;
@@ -237,3 +335,8 @@
         .card:hover::before {
             opacity: 1;
         }
+    /* Mostra overlay apenas quando tocar/clicar */
+    .card.active .card-overlay {
+        transform: translateY(0);
+    }
+        

@@ -18,7 +18,7 @@ function openModal(modalId) {
             images[0].classList.remove('active');
             images[1].classList.add('active');
         }
-    }, 5000);
+    }, 2500);
 }
 
 function closeModal(modalId) {
