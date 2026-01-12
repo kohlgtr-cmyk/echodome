@@ -1,0 +1,603 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sora', sans-serif;
+}
+@import '../css/partials/colors';
+@import '../css/partials/header';
+@import '../css/partials/layout';
+@import '../css/partials/members';
+
+body {
+    background-color: $fundo;
+}
+
+.border {
+    border-color: $text;
+    border: 2px;
+}
+.container {
+    width: 100%;
+}
+
+/*Centro*/
+
+.About {
+    border-bottom: 2px solid;
+    border-image: linear-gradient(to right, transparent 0%, #F1D6A3 20%, #E29A4A 50%, #F1D6A3 80%, transparent 100%) 1;
+
+}
+/*Footer*/
+
+footer {
+    img {
+        width: 250px;
+        align-items: center;
+        opacity: 0.5;
+        -webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
+        mask-image: radial-gradient(circle, black 40%, transparent 80%);
+    
+    }
+    i {
+        color: $text;
+        margin: 0 10px;
+        font-size: 24px;
+        &:hover {
+            color: $laranja-dourado;
+            animation: scaleIcon 0.5s forwards;
+            border: 0px;
+            background-color: $fundo;
+        }
+    }
+}
+@keyframes scaleIcon {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.3);
+    }
+}
+
+    /* Modal */
+.modal-images {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        
+        &.active {
+            opacity: 1;
+        }
+    }
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content-dusk {
+    overflow-y: auto;
+    max-height: 90vh;
+    position: relative;
+    background-color: $marrom-escuro;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 20px $hair-red-dark,
+        0 0 40px $hair-red-main,
+        0 0 60px $hair-red-light;
+    animation: slideIn 0.4s;
+}
+.modal-content-lyra {
+    overflow-y: auto;
+    max-height: 90vh;
+    position: relative;
+    background-color: $bg-cool;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 20px $hair-blue-dark,
+        0 0 40px $hair-blue-main,
+        0 0 60px $hair-blue-light;
+    animation: slideIn 0.4s;
+}
+.modal-content-ember {
+    overflow-y: auto;
+    max-height: 90vh;
+    position: relative;
+    background-color: $bg-gold;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 20px $hair-blonde-dark,
+        0 0 40px $hair-blonde-main,
+        0 0 60px $hair-blonde-light;
+    animation: slideIn 0.4s;
+}    
+.modal-content-trace {
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    background-color: $bg-brown;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 20px $hair-brown-dark,
+        0 0 40px $hair-brown-main,
+        0 0 60px $hair-brown-light;
+    animation: slideIn 0.4s;
+}
+.modal-content-od {
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    background-color: $bg-green;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 
+        0 0 20px $hair-green-dark,
+        0 0 40px $hair-green-main,
+        0 0 60px $hair-green-light;
+    animation: slideIn 0.4s;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column; // ADICIONE ESTA LINHA
+    align-items: center; // centraliza
+    gap: 30px;
+    padding: 40px;
+    color: #F1D6A3;
+}
+
+.modal-info-trace {
+    flex: 1;
+    
+    h2 {
+        color: $hair-brown-light;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    h3 {
+        color: $hair-brown-main;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: $hair-brown-dark;
+    }
+    
+    h4 {
+        color: $hair-brown-main;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        li {
+            padding: 5px 0;
+            color: $hair-brown-dark;
+            
+            &::before {
+                content: "▸ ";
+                color: $hair-brown-main;
+            }
+        }
+    }
+}
+.modal-info-od {
+    flex: 1;
+    
+    h2 {
+        color: $hair-green-light;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    h3 {
+        color: $hair-green-main;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: $hair-green-dark;
+    }
+    
+    h4 {
+        color: $hair-green-main;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        li {
+            padding: 5px 0;
+            color: $hair-green-dark;
+
+            &::before {
+                content: "▸ ";
+                color: $hair-green-main;
+            }
+        }
+    }
+}
+    .modal-info-ember {
+    flex: 1;
+    
+    h2 {
+        color: $hair-blonde-light;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    h3 {
+        color: $hair-blonde-main;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: $hair-blonde-dark;
+    }
+    
+    h4 {
+        color: $hair-blonde-main;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        li {
+            padding: 5px 0;
+            color: $hair-blonde-dark;
+            
+            &::before {
+                content: "▸ ";
+                color: $hair-blonde-main;
+            }
+        }
+    }
+}
+.modal-info-lyra {
+    flex: 1;
+    
+    h2 {
+        color: $hair-blue-light;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    h3 {
+        color: $hair-blue-main;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: $hair-blue-dark;
+    }
+    
+    h4 {
+        color: $hair-blue-main;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        li {
+            padding: 5px 0;
+            color: $hair-blue-dark;
+            
+            &::before {
+                content: "▸ ";
+                color: $hair-blue-main;
+            }
+        }
+    }
+}
+.modal-info-dusk {
+    flex: 1;
+    
+    h2 {
+        color: $laranja-dourado;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    h3 {
+        color: $laranja-queimado;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+    }
+    
+    h4 {
+        color: $laranja-dourado;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        li {
+            padding: 5px 0;
+            
+            &::before {
+                content: "▸ ";
+                color: $laranja-dourado;
+            }
+        }
+    }
+}
+.close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: $laranja-dourado;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    
+    &:hover {
+        color: $text;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+    // Responsivo para tablet e mobile
+@media screen and (max-width: 768px) {
+    .full-band {
+        flex-direction: column; // empilha os cards
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .lyra, .od, .trace, .ember, .dusk {
+        min-width: 100%; // ocupa largura total
+        max-width: 100%;
+        
+        img {
+            height: 250px; // altura fixa para não ficar muito grande
+            object-fit: cover;
+        }
+    }
+    
+    .info {
+        padding: 15px;
+        
+        strong, p {
+            font-size: 16px;
+        }
+        
+        .descricao {
+            font-size: 13px;
+        }
+    }
+    
+    // Modal no mobile
+    .modal-content {
+        width: 95%; // quase tela cheia
+        margin: 10% auto;
+    }
+    
+    .modal-body {
+        flex-direction: column; // imagem em cima, texto embaixo
+        padding: 20px;
+        
+        img {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+    
+    .modal-info {
+        h2 {
+            font-size: 24px;
+        }
+        
+        h3 {
+            font-size: 16px;
+        }
+        
+        p {
+            font-size: 14px;
+        }
+    }
+}
+
+// Responsivo para celulares pequenos
+@media screen and (max-width: 480px) {
+    .lyra, .od, .trace, .ember, .dusk {
+        img {
+            height: 200px; // menor ainda
+        }
+    }
+    
+    .info {
+        padding: 10px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+    }
+}
+.band {
+    text-align: center;
+    color: $text;
+    padding: 40px 20px;
+    border-radius: 8px;
+    
+    h1 {
+        padding: 20px;
+        cursor: pointer;
+        transition: color 0.5s;
+
+        span:hover {
+                border: dotted 2px;
+                border-radius: 12px;
+                padding: 5px;
+                background-color: $fundo-claro;
+                }
+        &:hover {
+            color: $laranja-dourado;
+            transition: 1.5s;
+            transform: scale(1.2)
+            
+        }
+    }
+    
+    img {
+        width: 100%;
+       
+        cursor: pointer;
+        border-radius: 12px;
+        transition: transform 0.3s;
+        
+        &:hover {
+            transform: scale(1.02);
+            transition: 1.5s;
+        }
+    }
+}
+#modal-meet .modal-images {
+    width: 90%;
+    }
+    
+.modal-content-meet {
+    position: relative;
+    margin: 5% auto;
+    padding: 0;
+    width: 80%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    background: $bg-0;
+      box-shadow:
+    0 0 10px $neon-blue-dark,
+    0 0 25px $neon-blue-main,
+    0 0 60px $neon-blue-light;    
+    animation: slideIn 0.4s;
+}
+
+.modal-info-meet {
+    flex: 1;
+    
+    h2 {
+        color: $laranja-dourado;
+        font-size: 32px;
+        margin-bottom: 10px;
+    }
+    
+    h3 {
+        color: $laranja-queimado;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
+    p {
+        line-height: 1.8;
+        margin-bottom: 20px;
+        color: $text;
+    }
+    
+    h4 {
+        color: $laranja-dourado;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+    
+    ul {
+        list-style: none;
+        padding-left: 0;
+        
+        li {
+            padding: 5px 0;
+            color: $text;
+            
+            &::before {
+                content: "▸ ";
+                color: $laranja-dourado;
+            }
+        }
+    }
+}

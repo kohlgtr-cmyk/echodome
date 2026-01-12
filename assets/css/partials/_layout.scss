@@ -1,0 +1,171 @@
+.members {
+    max-width: 100%;
+    color: $text;
+    h2 {
+        text-align: center;
+        color: $text;
+        padding: 20px;
+    }
+}
+
+.full-band {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 44px;
+    flex-wrap: wrap; // permite quebrar linha se não couber
+}
+
+.lyra, .od, .trace, .ember, .dusk { 
+    flex: 1;
+    gap: 10px;
+    text-align: center;
+    padding-bottom: 10px;
+    min-width: 250px;
+    max-width: 550px;
+    display: flex;
+    background-color: transparent;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0px -1px 17px -4px rgba(0,0,0,0.5);
+    
+    img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.25s;
+    }
+    
+    
+}
+
+.lyra:hover {
+        box-shadow: 
+            0 0 20px $hair-blue-dark,
+            0 0 40px $hair-blue-main,
+            0 0 60px $hair-blue-light,
+            0 0 80px $hair-blue-dark,
+            0 20px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
+        transform: scale(1.1);
+        transition: 1s;
+        
+        p {
+            color: $hair-blue-main;
+            transition: 1s;
+        }
+    }
+.od:hover {
+        box-shadow: 
+            0 0 20px $hair-green-dark,
+            0 0 40px $hair-green-main,
+            0 0 60px $hair-green-light,
+            0 0 80px $hair-green-dark,
+            0 20px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
+        transform: scale(1.1);
+        transition: 1s;
+        
+        p {
+            color: $hair-green-main;
+            transition: 1s;
+        }
+    }
+.trace:hover {
+        box-shadow: 
+            0 0 20px $hair-brown-dark,
+            0 0 40px $hair-brown-main,
+            0 0 60px $hair-brown-light,
+            0 0 80px $hair-brown-dark,
+            0 20px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
+        transform: scale(1.1);
+        transition: 1s;
+        
+        p {
+            color: $hair-brown-main;
+            transition: 1s;
+        }
+    }
+.ember:hover {
+        box-shadow: 
+            0 0 20px $hair-blonde-dark,
+            0 0 40px $hair-blonde-main,
+            0 0 60px $hair-blonde-light,
+            0 0 80px $hair-blonde-dark,
+            0 20px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
+        transform: scale(1.1);
+        transition: 1s;
+        
+        p {
+            color: $hair-blonde-main;
+            transition: 1s;
+        }
+    }
+.dusk:hover {
+        box-shadow: 
+            0 0 20px $hair-red-dark,
+            0 0 40px $hair-red-main,
+            0 0 60px $hair-red-light,
+            0 0 80px $hair-red-dark,
+            0 20px 40px rgba(0, 0, 0, 0.5);
+        transform: translateY(-5px);
+        transform: scale(1.1);
+        transition: 1s;
+        
+        p {
+            color: $hair-red-light;
+            transition: 1s;
+        }
+    }
+
+.info {
+    text-align: center;
+    min-width: none;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px;
+    
+    
+    button {
+        margin-top: 10px;
+        padding: 8px;
+        background-color: $laranja-dourado;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}
+
+.page {
+    color: $text;
+    line-height: 200%;
+    text-align: center;
+    padding-top: 150px;
+    font-size: 18px;
+
+}
+.About {
+    text-align: center;
+    color: $text;
+    line-height: 150%;
+    padding: 12px 50px;
+    font-size: 18px;
+    h1 {
+        padding: 20px;
+    }
+}
+.band {
+    img {
+        width: 100%;
+    }
+}
+
