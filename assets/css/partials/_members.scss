@@ -232,12 +232,8 @@
             font-size: 0.8rem;
             opacity: 0;
             transition: opacity 0.3s;
-            z-index: 10;
         }
 
         .card:hover::before {
             opacity: 1;
         }
-.card-inner {
-
-}
