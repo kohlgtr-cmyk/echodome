@@ -1,68 +1,95 @@
-let modalTimeout; // armazena o timeout ativo
+// ============================================
+// HAMBURGER MENU (mobile)
+// ============================================
+const hamburger = document.getElementById('hamburger');
+const headerMenu = document.getElementById('header-menu');
 
-function openModal(modalId) {
-    document.getElementById(modalId).style.display = "block";
-    document.body.style.overflow = "hidden";
-    
-    // Limpa qualquer timeout anterior
-    if (modalTimeout) {
-        clearTimeout(modalTimeout);
-    }
-    
-    // Troca APENAS para o modal que foi aberto
-    modalTimeout = setTimeout(() => {
-        const modal = document.getElementById(modalId);
-        const images = modal.querySelectorAll('.modal-images img');
-        
-        if (images.length > 1) {
-            images[0].classList.remove('active');
-            images[1].classList.add('active');
-        }
-    }, 2500);
+if (hamburger && headerMenu) {
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('open');
+        headerMenu.classList.toggle('open');
+    });
+
+    // Fecha o menu ao clicar em um link
+    headerMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('open');
+            headerMenu.classList.remove('open');
+        });
+    });
 }
 
-function closeModal(modalId) {
-    document.getElementById(modalId).style.display = "none";
-    document.body.style.overflow = "auto";
-    
-    // Limpa o timeout ao fechar
-    if (modalTimeout) {
-        clearTimeout(modalTimeout);
-    }
-    
-    // Reseta as imagens para o estado inicial
+// ============================================
+// MODAIS
+// ============================================
+function openModal(modalId) {
     const modal = document.getElementById(modalId);
-    const images = modal.querySelectorAll('.modal-images img');
-    if (images.length > 1) {
-        images[0].classList.add('active');
-        images[1].classList.remove('active');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // impede scroll da página por trás
+        startImageSlideshow(modal);
     }
+}
+
+function closeModal(modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = ''; // restaura scroll
+    stopImageSlideshow(modal);
 }
 
 // Fecha ao clicar no X
 document.querySelectorAll('.close').forEach(btn => {
-    btn.onclick = function() {
-        const modal = this.closest('.modal');
-        const modalId = modal.id;
-        closeModal(modalId);
+    btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal');
+        if (modal) closeModal(modal);
+    });
+});
+
+// Fecha ao clicar fora do conteúdo
+window.addEventListener('click', (e) => {
+    if (e.target.classList.contains('modal')) {
+        closeModal(e.target);
     }
 });
 
-// Fecha ao clicar fora do modal
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        const modalId = event.target.id;
-        closeModal(modalId);
-    }
-}
-    // Exemplo de como conectar com seus modais existentes
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                const memberClass = this.classList[1]; // dusk, trace, od, ember, ou lyra
-                const modalId = 'modal-' + memberClass;
-                
-                // Aqui você chamaria sua função openModal existente
-                console.log('Abrindo modal:', modalId);
-                // openModal(modalId); // Descomente quando integrar com seu código
-            });
+// Fecha com ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.modal').forEach(modal => {
+            if (modal.style.display === 'block') closeModal(modal);
         });
+    }
+});
+
+// ============================================
+// SLIDESHOW DE IMAGENS NOS MODAIS
+// ============================================
+const slideshowIntervals = {};
+
+function startImageSlideshow(modal) {
+    const images = modal.querySelectorAll('.modal-images img');
+    if (images.length < 2) return;
+
+    let currentIndex = 0;
+    const id = modal.id;
+
+    slideshowIntervals[id] = setInterval(() => {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+    }, 3000);
+}
+
+function stopImageSlideshow(modal) {
+    const id = modal.id;
+    if (slideshowIntervals[id]) {
+        clearInterval(slideshowIntervals[id]);
+        delete slideshowIntervals[id];
+    }
+
+    // Reset imagens para a primeira
+    const images = modal.querySelectorAll('.modal-images img');
+    images.forEach((img, i) => {
+        img.classList.toggle('active', i === 0);
+    });
+}
