@@ -58,6 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+// ============================================
+// STICKY NAV — adiciona classe ao rolar
+// ============================================
+(function initStickyNav() {
+    const nav = document.querySelector('header nav.header-content');
+    if (!nav) return;
+    const onScroll = () => {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+})();
+
 // ============================================
 // ACTIVE NAV LINK
 // ============================================
@@ -194,12 +208,17 @@ function stopImageSlideshow(modal) {
 // LIGHTBOX (galeria)
 // ============================================
 const lightboxImages = [
-    { src: 'assets/img/full-band.jpeg',   caption: 'The full band' },
-    { src: 'assets/img/bg/trace.jpg',     caption: 'Trace — Singer / Guitar' },
-    { src: 'assets/img/bg/od.jpg',        caption: 'OD — Lead Guitar' },
-    { src: 'assets/img/bg/ember.jpg',     caption: 'Ember — Drummer' },
-    { src: 'assets/img/bg/lyra.jpg',      caption: 'Lyra — Keyboards & Synths' },
-    { src: 'assets/img/bg/dusk.jpg',      caption: 'Dusk — Bass Player' },
+    { src: 'assets/img/full-band.jpeg',   caption: 'The full band' },//0
+    { src: 'assets/img/bg/trace.jpg',     caption: 'Trace — Singer / Guitar' },//1
+    { src: 'assets/img/bg/od.jpg',        caption: 'OD — Lead Guitar' },//2
+    { src: 'assets/img/bg/ember.jpg',     caption: 'Ember — Drummer' },//3
+    { src: 'assets/img/bg/lyra.jpg',      caption: 'Lyra — Keyboards & Synths' },//4
+    { src: 'assets/img/bg/dusk.jpg',      caption: 'Dusk — Bass Player' },//5
+    { src: 'assets/img/dusk-sofa.png',   caption: 'Dusk - Bass Player' },//6
+    { src: 'assets/img/lyra-sofa.png',    caption: 'Lyra - Keyboards & Synths' },//7
+    { src: 'assets/img/trace-sofa.jpg',   caption: 'Trace - Singer / Guitar' },//8
+    { src: 'assets/img/od-sofa.jpg',      caption: 'OD - Lead Guitar' },//9
+    { src: 'assets/img/ember-sofa.jpg',   caption: 'Ember - Drummer' },//10
 ];
 
 let currentLightboxIndex = 0;
