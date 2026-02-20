@@ -1,319 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-        <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>EchoDome — The Band</title>
-    </head>
-    <body>
-        <!-- HEADER / NAV -->
-        <header class="band-page-header">
-            <nav class="header-content container">
-                <div class="header-logo">
-                    <a href="index.html" style="text-decoration:none;"><h2>EchoDome</h2></a>
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>EchoDome — The Band</title>
+</head>
+<body class="band-page">
 
-                <button class="hamburger" id="hamburger" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
 
-                <ul class="header-menu" id="header-menu">
-                    <li><a href="index.html#about" class="a">About</a></li>
-                    <li><a href="index.html#music" class="a">Music</a></li>
-                    <li><a href="index.html#tour" class="a">Tour</a></li>
-                    <li><a href="index.html#contact" class="a">Contact</a></li>
-                    <li><a href="band.html" class="a">Band</a></li>
-                </ul>
-            </nav>
-        </header>
+    <!-- HEADER -->
+    <header class="band-page-header">
+        <nav class="header-content container">
+            <div class="header-logo">
+                <a href="index.html" style="text-decoration:none;"><h2>EchoDome</h2></a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="header-menu" id="header-menu">
+                <li><a href="index.html#about" class="a nav-link" data-page="index">About</a></li>
+                <li><a href="index.html#music" class="a nav-link" data-page="index">Music</a></li>
+                <li><a href="index.html#tour" class="a nav-link" data-page="index">Tour</a></li>
+                <li><a href="index.html#contact" class="a nav-link" data-page="index">Contact</a></li>
+                <li><a href="band.html" class="a nav-link active" data-page="band">Band</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- PAGE TITLE -->
-        <section class="band-page-title">
-            <h1>The Band</h1>
-            <p>Five outcasts. One sound.</p>
-        </section>
+    <!-- PAGE TITLE -->
+    <section class="band-page-title">
+        <div class="section-tag">// The Band</div>
+        <h1>Meet the Outcasts</h1>
+        <p>Five broken signals. One transmission.</p>
+    </section>
 
-        <!-- MEMBERS CARDS -->
-        <section class="members-section">
-            <div class="cards-container">
-                <div class="card card-mobile-dusk dusk" onclick="openModal('modal-dusk')">
-                    <div class="card-inner">
-                        <img src="assets/img/bg/dusk.jpg" alt="Dusk">
-                        <div class="card-overlay">
-                            <h3>Dusk</h3>
-                            <p>Bass Player</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card od" onclick="openModal('modal-od')">
-                    <div class="card-inner">
-                        <img src="assets/img/bg/od.jpg" alt="OD">
-                        <div class="card-overlay">
-                            <h3>OD</h3>
-                            <p>Lead Guitar</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card trace" onclick="openModal('modal-trace')">
-                    <div class="card-inner">
-                        <img src="assets/img/bg/trace.jpg" alt="Trace">
-                        <div class="card-overlay">
-                            <h3>Trace</h3>
-                            <p>Singer/Guitar</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card ember" onclick="openModal('modal-ember')">
-                    <div class="card-inner">
-                        <img src="assets/img/bg/ember.jpg" alt="Ember">
-                        <div class="card-overlay">
-                            <h3>Ember</h3>
-                            <p>Drummer</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-mobile-lyra lyra" onclick="openModal('modal-lyra')">
-                    <div class="card-inner">
-                        <img src="assets/img/bg/lyra.jpg" alt="Lyra">
-                        <div class="card-overlay">
-                            <h3>Lyra</h3>
-                            <p>Keyboards and Synths</p>
-                        </div>
+    <!-- MEMBERS CARDS -->
+    <section class="members-section">
+        <div class="cards-container">
+            <div class="card card-mobile-dusk dusk" onclick="openModal('modal-dusk')">
+                <div class="card-inner">
+                    <img src="assets/img/bg/dusk.jpg" alt="Dusk">
+                    <div class="card-overlay">
+                        <h3>Dusk</h3>
+                        <p>Bass Player</p>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="card od" onclick="openModal('modal-od')">
+                <div class="card-inner">
+                    <img src="assets/img/bg/od.jpg" alt="OD">
+                    <div class="card-overlay">
+                        <h3>OD</h3>
+                        <p>Lead Guitar</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card trace" onclick="openModal('modal-trace')">
+                <div class="card-inner">
+                    <img src="assets/img/bg/trace.jpg" alt="Trace">
+                    <div class="card-overlay">
+                        <h3>Trace</h3>
+                        <p>Singer / Guitar</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card ember" onclick="openModal('modal-ember')">
+                <div class="card-inner">
+                    <img src="assets/img/bg/ember.jpg" alt="Ember">
+                    <div class="card-overlay">
+                        <h3>Ember</h3>
+                        <p>Drummer</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-mobile-lyra lyra" onclick="openModal('modal-lyra')">
+                <div class="card-inner">
+                    <img src="assets/img/bg/lyra.jpg" alt="Lyra">
+                    <div class="card-overlay">
+                        <h3>Lyra</h3>
+                        <p>Keyboards & Synths</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- HOW WE MET -->
-        <section class="band">
-            <h1 onclick="openModal('modal-meet')" class="clickable-heading"><span>How we meet?</span></h1>
-            <img src="assets/img/full-band.jpeg" alt="full-band" onclick="openModal('modal-meet')" class="clickable-image meet-image">
-        </section>
+    <!-- HOW WE MET -->
+    <section class="band">
+        <h1 onclick="openModal('modal-meet')" class="clickable-heading"><span>How we meet?</span></h1>
+        <img src="assets/img/full-band.jpeg" alt="full-band" onclick="openModal('modal-meet')" class="clickable-image meet-image">
+    </section>
 
-        <!-- FOOTER -->
-        <footer class="footer" id="contact">
+    <!-- GALLERY -->
+    <section class="gallery-section">
+        <div class="section-tag">// Gallery</div>
+        <h2>Behind the Noise</h2>
+        <p class="gallery-subtitle">Click any photo to expand</p>
+        <div class="gallery-grid" id="gallery-grid">
+            <div class="gallery-item" onclick="openLightbox(0)">
+                <img src="assets/img/full-band.jpeg" alt="Full Band">
+                <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(1)">
+                <img src="assets/img/bg/trace.jpg" alt="Trace">
+                <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(2)">
+                <img src="assets/img/bg/od.jpg" alt="OD">
+                <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(3)">
+                <img src="assets/img/bg/ember.jpg" alt="Ember">
+                <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(4)">
+                <img src="assets/img/bg/lyra.jpg" alt="Lyra">
+                <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            </div>
+            <div class="gallery-item" onclick="openLightbox(5)">
+                <img src="assets/img/bg/dusk.jpg" alt="Dusk">
+                <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
+        <button title="k" class="lightbox-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+        <button title="k" class="lightbox-prev" onclick="lightboxNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button title="k" class="lightbox-next" onclick="lightboxNav(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+        <div class="footer-bottom">
             <img src="assets/img/logo.jpeg" alt="EchoDome Band Logo">
             <div class="footer-icons">
-                <a href="#" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram fa-2x"></i>
-                </a>
-                <a href="#" aria-label="YouTube">
-                    <i class="fa-brands fa-youtube fa-2x"></i>
-                </a>
-                <a href="#" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook fa-2x"></i>
-                </a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram fa-2x"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube fa-2x"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook fa-2x"></i></a>
+                <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify fa-2x"></i></a>
             </div>
-        </footer>
+            <p class="footer-copy">© 2025 EchoDome. All rights reserved.</p>
+        </div>
+    </footer>
 
-        <!-- MODAIS -->
-        <div id="modal-dusk" class="modal">
-            <div class="modal-content-dusk">
-                <span class="close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-images">
-                        <img src="assets/img/Dusk.jpg" alt="Dusk" class="active">
-                        <img src="assets/img/dusk.gif" alt="Dusk Video">
-                    </div>
-                    <div class="modal-info-dusk">
-                        <h2>Dusk</h2>
-                        <h3>Bass Player</h3>
-                        <p>⚙️ Origin:<br>
-                            Before becoming <strong>DUSK</strong>, he was a road mechanic (or something like that, he never explained that part so well).<br>
-                            He spent his days fixing cars and his nights playing bass in forgotten desert bars.<br>
-                            During an electrical storm, lightning struck the bar's generator while he was playing — the explosion left him unconscious for three weeks.<br>
-                            When he woke up, he said he heard rhythms inside his own body.<br>
-                            Since then, he plays with his face covered, saying that "the cold air keeps the sound inside."<br>
-                            The bass is his breath — each note, a heartbeat.
-                        </p>
-                        <h4>Influences:</h4>
-                        <ul>
-                            <li>...</li>
-                            <li>...</li>
-                        </ul>
-                    </div>
+    <!-- MODAIS -->
+    <div id="modal-dusk" class="modal">
+        <div class="modal-content-dusk">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="assets/img/Dusk.jpg" alt="Dusk" class="active">
+                    <img src="assets/img/dusk.gif" alt="Dusk Video">
+                </div>
+                <div class="modal-info-dusk">
+                    <h2>Dusk</h2>
+                    <h3>Bass Player</h3>
+                    <p>⚙️ Origin:<br>
+                        Before becoming <strong>DUSK</strong>, he was a road mechanic (or something like that — he never explained that part very well).<br>
+                        He spent his days fixing cars and his nights playing bass in forgotten desert bars.<br>
+                        During an electrical storm, lightning struck the bar's generator while he was playing — the explosion left him unconscious for three weeks.<br>
+                        When he woke up, he said he could hear rhythms inside his own body.<br>
+                        Since then, he plays with his face covered, saying that <i>"the cold air keeps the sound inside."</i><br>
+                        The bass is his breath — each note, a heartbeat.
+                    </p>
+                    <h4>Influences:</h4>
+                    <ul>
+                        <li>Cliff Burton (Metallica)</li>
+                        <li>Geezer Butler (Black Sabbath)</li>
+                        <li>Mike Dirnt (Green Day)</li>
+                        <li>Flea (Red Hot Chili Peppers)</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="modal-trace" class="modal">
-            <div class="modal-content-trace">
-                <span class="close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-images">
-                        <img src="assets/img/Trace.jpg" alt="Trace" class="active">
-                        <img src="assets/img/trace.gif" alt="Trace Video">
-                    </div>
-                    <div class="modal-info-trace">
-                        <h2>Trace</h2>
-                        <h3>Singer/Guitar</h3>
-                        <p>🌫️ Origin:<br>
-                            <strong>TRACE</strong> was born from silence.<br>
-                            Before the band existed, he was an independent singer who used to play in small clubs,<br>
-                            always alone, always with his voice on the edge of breaking, someone who transformed noise and chaos into words.<br>
-                            During a tour, a stage accident left him between life and nothingness.<br>
-                            When he returned, his voice never sounded the same again — it gained texture, noise, pain. (it's what he said)<br>
-                            He performed alone, with an old guitar and a hoarse voice — until one night he completely lost his voice during an underground show.<br>
-                            No one knows how it happened — some say it was an accident, others speak of a live emotional breakdown.<br>
-                            After that, he <i>disappeared.</i><br>
-                            Months later, recordings of a metallic and distorted voice began to emerge,
-                            whispering lyrics about loss, guilt, and rebirth — all signed with the name <strong><i>"TRACE"</i></strong>.<br>
-                            Today, <strong>TRACE</strong> sings with a bandage covering part of his face, saying it <i>"holds the sound in place"</i>,<br>
-                            symbolizing the silence that marked him.<br>
-                            No one knows his real name. He claims that <strong>"TRACE"</strong> is all that remains of him — the vestige of what he once was.<br>
-                            His white guitar is called <i>"Echo"</i>, a symbol of rebirth and remembrance.<br>
-                            On stage, he sings as if trying to remember who he was before the sound consumed him.<br>
-                            His white guitar represents the contrast between purity and noise — he says it's <i>"the color that sound would have, if sound could shine"</i>.
-                        </p>
-                        <h4>Influences:</h4>
-                        <ul>
-                            <li>...</li>
-                            <li>...</li>
-                        </ul>
-                    </div>
+    <div id="modal-trace" class="modal">
+        <div class="modal-content-trace">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="assets/img/Trace.jpg" alt="Trace" class="active">
+                    <img src="assets/img/trace.gif" alt="Trace Video">
+                </div>
+                <div class="modal-info-trace">
+                    <h2>Trace</h2>
+                    <h3>Singer / Guitar</h3>
+                    <p>🌫️ Origin:<br>
+                        <strong>TRACE</strong> was born from silence.<br>
+                        Before the band existed, he was an independent singer who played in small clubs —
+                        always alone, always with his voice on the edge of breaking.<br>
+                        During a tour, a stage accident left him between life and nothingness.<br>
+                        When he returned, his voice never sounded the same again — it gained texture, noise, pain.<br>
+                        No one knows his real name. He claims that <strong>"TRACE"</strong> is all that remains of him.<br>
+                        His white guitar is called <i>"Echo"</i> — a symbol of rebirth and remembrance.
+                    </p>
+                    <h4>Influences:</h4>
+                    <ul>
+                        <li>Kurt Cobain (Nirvana)</li>
+                        <li>Thom Yorke (Radiohead)</li>
+                        <li>Gerard Way (My Chemical Romance)</li>
+                        <li>Maynard James Keenan (Tool)</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="modal-od" class="modal">
-            <div class="modal-content-od">
-                <span class="close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-images">
-                        <img src="assets/img/OD.jpeg" alt="OD" class="active">
-                        <img src="assets/img/od.gif" alt="OD Video">
-                    </div>
-                    <div class="modal-info-od">
-                        <h2>OD</h2>
-                        <h3>Lead Guitar</h3>
-                        <p>🌫️ Origin:<br>
-                            No one knows for sure who he was before becoming <strong>OD</strong>.<br>
-                            They say he was an underground guitarist from a forgotten scene, known for playing with so much volume and distortion that the amplifiers literally burned.<br>
-                            During a performance, a fire engulfed the stage — and he disappeared amidst the smoke and sound.<br>
-                            Months later, mysterious videos began circulating of a masked figure with neon green hair playing impossible riffs in abandoned warehouses.<br>
-                            The sound seemed to come from another plane, a mixture of pain, anger, and pure electrical energy.<br>
-                            <strong>OD</strong> plays as if sound were a weapon.<br>
-                            He never speaks in interviews, never shows his face — he only appears amidst the smoke and lights.<br>
-                            The "mummy" bandage covering his mouth and nose is a reminder of the fire, but also a symbol: <i>he is the "guitarist who silenced the real world."</i><br>
-                            His name comes from the guitar pedal he destroyed while creating the riff that would define the band's sound — <strong>Overdrive</strong>.
-                        </p>
-                        <h4>Influences:</h4>
-                        <ul>
-                            <li>...</li>
-                            <li>...</li>
-                        </ul>
-                    </div>
+    <div id="modal-od" class="modal">
+        <div class="modal-content-od">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="assets/img/OD.jpeg" alt="OD" class="active">
+                    <img src="assets/img/od.gif" alt="OD Video">
+                </div>
+                <div class="modal-info-od">
+                    <h2>OD</h2>
+                    <h3>Lead Guitar</h3>
+                    <p>🌫️ Origin:<br>
+                        No one knows for sure who he was before becoming <strong>OD</strong>.<br>
+                        They say he was an underground guitarist from a forgotten scene, known for playing with so much volume and distortion that the amplifiers literally burned.<br>
+                        During a performance, a fire engulfed the stage — and he disappeared amidst the smoke and sound.<br>
+                        <strong>OD</strong> plays as if sound were a weapon. He never speaks in interviews, never shows his face.<br>
+                        His name comes from the guitar pedal he destroyed — <strong>Overdrive</strong>.
+                    </p>
+                    <h4>Influences:</h4>
+                    <ul>
+                        <li>Tom Morello (Rage Against the Machine)</li>
+                        <li>Jimi Hendrix</li>
+                        <li>Dimebag Darrell (Pantera)</li>
+                        <li>Mick Thomson (Slipknot)</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="modal-ember" class="modal">
-            <div class="modal-content-ember">
-                <span class="close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-images">
-                        <img src="assets/img/Ember.jpeg" alt="Ember" class="active">
-                        <img src="assets/img/ember.gif" alt="Ember Video">
-                    </div>
-                    <div class="modal-info-ember">
-                        <h2>Ember</h2>
-                        <h3>Drummer</h3>
-                        <p>⚙️ Origin:<br>
-                            No one knows <strong>EMBER's</strong> real name.<br>
-                            They say he started playing in abandoned factories, using pieces of metal, cans, and chains to create his own rhythm.<br>
-                            People called him the sound that never sleeps.<br>
-                            During a fire in a warehouse where he used to rehearse, the sound was reported missing, as the warehouse fell completely silent after that day.<br>
-                            Days later, a drummer appeared with his face covered and a burning gaze, and everyone thought, <i>"Could it be him?"</i><br>
-                            Since then, fire has become part of his essence — he plays as if each beat were the last spark of a world about to explode.
-                        </p>
-                        <h4>Influences:</h4>
-                        <ul>
-                            <li>...</li>
-                            <li>...</li>
-                        </ul>
-                    </div>
+    <div id="modal-ember" class="modal">
+        <div class="modal-content-ember">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="assets/img/Ember.jpeg" alt="Ember" class="active">
+                    <img src="assets/img/ember.gif" alt="Ember Video">
+                </div>
+                <div class="modal-info-ember">
+                    <h2>Ember</h2>
+                    <h3>Drummer</h3>
+                    <p>⚙️ Origin:<br>
+                        No one knows <strong>EMBER's</strong> real name.<br>
+                        They say she started playing in abandoned factories, using pieces of metal, cans, and chains to create her own rhythm.<br>
+                        People called her <i>"the sound that never sleeps."</i><br>
+                        Since then, fire has become part of her essence — she plays as if each beat were the last spark of a world about to explode.
+                    </p>
+                    <h4>Influences:</h4>
+                    <ul>
+                        <li>Dave Grohl (Nirvana / Foo Fighters)</li>
+                        <li>Travis Barker (Blink-182)</li>
+                        <li>Joey Jordison (Slipknot)</li>
+                        <li>John Bonham (Led Zeppelin)</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="modal-lyra" class="modal">
-            <div class="modal-content-lyra">
-                <span class="close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-images">
-                        <img src="assets/img/Lyra.jpeg" alt="Lyra" class="active">
-                        <img src="assets/img/lyra.gif" alt="Lyra Video">
-                    </div>
-                    <div class="modal-info-lyra">
-                        <h2>Lyra</h2>
-                        <h3>Keyboards and Synths</h3>
-                        <p>🌙 Origin:<br>
-                            Before she was known as <strong>Lyra</strong>, she was just a shadow in the background — a composer who wrote soundtracks for dreams that were never remembered.<br>
-                            It is said that she used to play alone in empty stations, using the sound of the passing train as a metronome.<br>
-                            No one has heard from her since the day her voice broke at an experimental show.<br>
-                            Since then, she communicates only with the keyboard — transforming emotions into frequencies, and silence into melody.<br>
-                            When <strong>TRACE</strong> invited her to join the band, he simply said:<br>
-                            <i>"We don't need your voice. <strong>We</strong> need you."</i><br>
-                            Now, <strong>LYRA</strong> is the calm heart of chaos, the sound between the beats of <strong>EMBER</strong>,
-                            the echoes of <strong>DUSK</strong> and the screams of <strong>TRACE</strong>.
-                        </p>
-                        <h4>Influences:</h4>
-                        <ul>
-                            <li>...</li>
-                            <li>...</li>
-                        </ul>
-                    </div>
+    <div id="modal-lyra" class="modal">
+        <div class="modal-content-lyra">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="assets/img/Lyra.jpeg" alt="Lyra" class="active">
+                    <img src="assets/img/lyra.gif" alt="Lyra Video">
+                </div>
+                <div class="modal-info-lyra">
+                    <h2>Lyra</h2>
+                    <h3>Keyboards & Synths</h3>
+                    <p>🌙 Origin:<br>
+                        Before she was known as <strong>Lyra</strong>, she was just a shadow in the background — a composer who wrote soundtracks for dreams that were never remembered.<br>
+                        She used to play alone in empty stations, using the sound of passing trains as a metronome.<br>
+                        When <strong>TRACE</strong> invited her to join the band, he simply said:<br>
+                        <i>"We don't need your voice. <strong>We</strong> need you."</i><br>
+                        Now, <strong>LYRA</strong> is the calm heart of chaos.
+                    </p>
+                    <h4>Influences:</h4>
+                    <ul>
+                        <li>Trent Reznor (Nine Inch Nails)</li>
+                        <li>Jon Lord (Deep Purple)</li>
+                        <li>Jordan Rudess (Dream Theater)</li>
+                        <li>Brian Eno</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="modal-meet" class="modal">
-            <div class="modal-content-meet">
-                <span class="close">&times;</span>
-                <div class="modal-body">
-                    <div class="modal-images">
-                        <img src="assets/img/full-band-1.jpg" alt="Band Meeting" class="active">
-                        <img src="assets/img/full-band.gif" alt="Band Story Video">
-                    </div>
-                    <div class="modal-info-meet">
-                        <h2>How We Met</h2>
-                        <h3>The Beginning of EchoDome</h3>
-                        <p>
-                            It all started in an abandoned studio on a rainy night in 2023...
-                            <br><br>
-                            TRACE was playing alone when OD walked in, guitar in hand.
-                            They jammed for hours without saying a word.
-                            <br><br>
-                            EMBER found them through the noise - literally. She was living in the apartment above
-                            and came down to complain, but ended up joining instead.
-                            <br><br>
-                            LYRA appeared one day, set up her keyboard in the corner, and never left.
-                            <br><br>
-                            DUSK was the last piece. He heard them from the street and knew he had found his home.
-                            <br><br>
-                            We didn't choose each other. The music did.
-                        </p>
-                        <h4>First Rehearsal Location:</h4>
-                        <ul>
-                            <li>Old Studio on 5th Avenue</li>
-                            <li>Now demolished, but forever in our hearts</li>
-                        </ul>
-                    </div>
+    <div id="modal-meet" class="modal">
+        <div class="modal-content-meet">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <img src="assets/img/full-band-1.jpg" alt="Band Meeting" class="active">
+                    <img src="assets/img/full-band.gif" alt="Band Story Video">
+                </div>
+                <div class="modal-info-meet">
+                    <h2>How We Met</h2>
+                    <h3>The Beginning of EchoDome</h3>
+                    <p>
+                        It all started in an abandoned studio on a rainy night in 2023...<br><br>
+                        TRACE was playing alone when OD walked in, guitar in hand.
+                        They jammed for hours without saying a word.<br><br>
+                        EMBER found them through the noise — literally. She was living in the apartment above
+                        and came down to complain, but ended up joining instead.<br><br>
+                        LYRA appeared one day, set up her keyboard in the corner, and never left.<br><br>
+                        DUSK was the last piece. He heard them from the street and knew he had found his home.<br><br>
+                        We didn't choose each other. The music did.
+                    </p>
+                    <h4>First Rehearsal Location:</h4>
+                    <ul>
+                        <li>Old Studio on 5th Avenue</li>
+                        <li>Now demolished, but forever in our hearts</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script src="assets/js/script.js"></script>
-    </body>
+    <script src="assets/js/script.js"></script>
+</body>
 </html>
