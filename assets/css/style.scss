@@ -100,8 +100,8 @@ header::before {
   width: 100%;
   padding: 20px 25px;
   background: rgba(22, 30, 33, 0.92);
-  backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   border-bottom: 2px solid;
   -o-border-image: var(--border);
      border-image: var(--border);
