@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>EchoDome</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: #161e21;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Sora', sans-serif;
+        }
+
+        /* ── IFRAME ── */
+        #site-frame {
+            flex: 1;
+            border: none;
+            width: 100%;
+            /* deixa espaço pro player na base */
+            height: calc(100vh - 80px);
+        }
+
+        /* ── PLAYER ── */
+        #persistent-player {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(16, 22, 24, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(226, 154, 74, 0.25);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 20px;
+            z-index: 9999;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Capa */
+        .player-cover {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid rgba(226, 154, 74, 0.3);
+            flex-shrink: 0;
+        }
+
+        /* Info da faixa */
+        .player-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            width: 160px;
+            flex-shrink: 0;
+        }
+
+        .player-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
+            color: #F1D6A3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-artist {
+            font-size: 0.7rem;
+            color: rgba(241, 214, 163, 0.5);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Controles centrais */
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .ctrl-btn {
+            background: none;
+            border: none;
+            color: rgba(241, 214, 163, 0.6);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 50%;
+            transition: color 0.2s, transform 0.15s;
+            line-height: 1;
+        }
+
+        .ctrl-btn:hover { color: #E29A4A; transform: scale(1.15); }
+
+        .ctrl-btn.play-pause {
+            width: 42px;
+            height: 42px;
+            background: #E29A4A;
+            color: #161e21;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ctrl-btn.play-pause:hover {
+            background: #F1D6A3;
+            color: #161e21;
+            transform: scale(1.08);
+        }
+
+        /* Barra de progresso + tempo */
+        .player-progress-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 420px;
+        }
+
+        .player-time {
+            font-size: 0.7rem;
+            color: rgba(241, 214, 163, 0.5);
+            white-space: nowrap;
+            min-width: 36px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 3px;
+            background: rgba(241, 214, 163, 0.15);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #E29A4A;
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.1s linear;
+            pointer-events: none;
+        }
+
+        .progress-thumb {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 12px;
+            height: 12px;
+            background: #E29A4A;
+            border-radius: 50%;
+            transition: transform 0.2s;
+            pointer-events: none;
+        }
+
+        .progress-bar:hover .progress-thumb { transform: translate(-50%, -50%) scale(1); }
+
+        /* Volume */
+        .player-volume {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .volume-icon {
+            background: none;
+            border: none;
+            color: rgba(241, 214, 163, 0.5);
+            cursor: pointer;
+            font-size: 0.85rem;
+            padding: 4px;
+            transition: color 0.2s;
+        }
+        .volume-icon:hover { color: #E29A4A; }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            height: 3px;
+            background: rgba(241, 214, 163, 0.15);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 11px;
+            height: 11px;
+            background: #E29A4A;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Estado: sem música carregada */
+        .player-idle .player-title { color: rgba(241, 214, 163, 0.35); }
+        .player-idle .ctrl-btn.play-pause { background: rgba(226,154,74,0.25); pointer-events: none; }
+
+        /* Visualizador de ondas (decorativo quando tocando) */
+        .player-wave {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 20px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .player-wave.active { opacity: 1; }
+
+        .player-wave span {
+            display: block;
+            width: 2px;
+            background: #E29A4A;
+            border-radius: 2px;
+            animation: playerWave 1.2s ease-in-out infinite;
+        }
+
+        .player-wave span:nth-child(1) { animation-delay: 0.0s; }
+        .player-wave span:nth-child(2) { animation-delay: 0.2s; }
+        .player-wave span:nth-child(3) { animation-delay: 0.4s; }
+        .player-wave span:nth-child(4) { animation-delay: 0.2s; }
+        .player-wave span:nth-child(5) { animation-delay: 0.0s; }
+
+        @keyframes playerWave {
+            0%, 100% { height: 4px; }
+            50%       { height: 18px; }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            #persistent-player { padding: 0 12px; gap: 10px; }
+            .player-info { width: 100px; }
+            .player-progress-wrap { max-width: none; }
+            .player-volume { display: none; }
+            .player-wave { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- IFRAME — carrega index.html por padrão -->
+    <iframe id="site-frame" src="index.html" title="EchoDome"></iframe>
+
+    <!-- PLAYER PERSISTENTE -->
+    <div id="persistent-player" class="player-idle">
+
+        <img class="player-cover" id="player-cover" src="assets/img/logo.jpeg" alt="cover">
+
+        <div class="player-info">
+            <div class="player-title" id="player-title">No track selected</div>
+            <div class="player-artist" id="player-artist">EchoDome</div>
+        </div>
+
+        <div class="player-wave" id="player-wave">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="player-controls">
+            <button class="ctrl-btn" id="btn-prev" title="Previous">
+                <i class="fa-solid fa-backward-step"></i>
+            </button>
+            <button class="ctrl-btn play-pause" id="btn-play" title="Play / Pause">
+                <i class="fa-solid fa-play" id="play-icon"></i>
+            </button>
+            <button class="ctrl-btn" id="btn-next" title="Next">
+                <i class="fa-solid fa-forward-step"></i>
+            </button>
+            <button class="ctrl-btn" id="btn-shuffle" title="Shuffle">
+                <i class="fa-solid fa-shuffle"></i>
+            </button>
+            <button class="ctrl-btn" id="btn-repeat" title="Repeat">
+                <i class="fa-solid fa-repeat"></i>
+            </button>
+        </div>
+
+        <div class="player-progress-wrap">
+            <span class="player-time" id="time-current">0:00</span>
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+                <div class="progress-thumb" id="progress-thumb"
+                     style="left: 0%"></div>
+            </div>
+            <span class="player-time" id="time-total">0:00</span>
+        </div>
+
+        <div class="player-volume">
+            <button class="volume-icon" id="btn-mute" title="Mute">
+                <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+            </button>
+            <input type="range" class="volume-slider" id="volume-slider"
+                   min="0" max="1" step="0.01" value="0.8">
+        </div>
+
+    </div>
+
+    <!-- Áudio real -->
+    <audio id="audio-engine" preload="metadata"></audio>
+
+    <!-- Config das músicas -->
+    <script src="assets/js/music.js"></script>
+
+    <script>
+    // ============================================
+    // PLAYER ENGINE
+    // ============================================
+    const audio       = document.getElementById('audio-engine');
+    const player      = document.getElementById('persistent-player');
+    const cover       = document.getElementById('player-cover');
+    const titleEl     = document.getElementById('player-title');
+    const artistEl    = document.getElementById('player-artist');
+    const playIcon    = document.getElementById('play-icon');
+    const wave        = document.getElementById('player-wave');
+    const progressBar = document.getElementById('progress-bar');
+    const progressFill= document.getElementById('progress-fill');
+    const progressThumb=document.getElementById('progress-thumb');
+    const timeCurrent = document.getElementById('time-current');
+    const timeTotal   = document.getElementById('time-total');
+    const volumeSlider= document.getElementById('volume-slider');
+    const volumeIcon  = document.getElementById('volume-icon');
+
+    let currentIndex = 0;
+    let isPlaying    = false;
+    let isShuffle    = false;
+    let isRepeat     = false;
+    let tracks       = [];
+
+    // Carrega tracks do music.js (se disponível)
+    if (typeof ECHODOME_TRACKS !== 'undefined') {
+        tracks = ECHODOME_TRACKS;
+    }
+
+    // ── Helpers ──
+    function formatTime(s) {
+        if (isNaN(s)) return '0:00';
+        const m = Math.floor(s / 60);
+        const sec = Math.floor(s % 60);
+        return `${m}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function loadTrack(index) {
+        if (!tracks.length) return;
+        const t = tracks[index];
+        audio.src     = t.src;
+        titleEl.textContent  = t.title;
+        artistEl.textContent = t.artist;
+        cover.src     = t.cover || 'assets/img/logo.jpeg';
+        timeTotal.textContent = t.duration || '0:00';
+        player.classList.remove('player-idle');
+        progressFill.style.width = '0%';
+        progressThumb.style.left = '0%';
+        timeCurrent.textContent  = '0:00';
+    }
+
+    function play() {
+        if (!tracks.length) return;
+        audio.play().then(() => {
+            isPlaying = true;
+            playIcon.className = 'fa-solid fa-pause';
+            wave.classList.add('active');
+        }).catch(() => {});
+    }
+
+    function pause() {
+        audio.pause();
+        isPlaying = false;
+        playIcon.className = 'fa-solid fa-play';
+        wave.classList.remove('active');
+    }
+
+    function playTrack(index) {
+        currentIndex = index;
+        loadTrack(index);
+        play();
+    }
+
+    function nextTrack() {
+        if (isShuffle) {
+            currentIndex = Math.floor(Math.random() * tracks.length);
+        } else {
+            currentIndex = (currentIndex + 1) % tracks.length;
+        }
+        playTrack(currentIndex);
+    }
+
+    function prevTrack() {
+        // Se passou mais de 3s, volta ao início da faixa
+        if (audio.currentTime > 3) {
+            audio.currentTime = 0;
+            return;
+        }
+        currentIndex = (currentIndex - 1 + tracks.length) % tracks.length;
+        playTrack(currentIndex);
+    }
+
+    // ── Controles ──
+    document.getElementById('btn-play').addEventListener('click', () => {
+        if (!tracks.length) return;
+        if (!audio.src || audio.src === window.location.href) {
+            loadTrack(currentIndex);
+        }
+        isPlaying ? pause() : play();
+    });
+
+    document.getElementById('btn-next').addEventListener('click', nextTrack);
+    document.getElementById('btn-prev').addEventListener('click', prevTrack);
+
+    document.getElementById('btn-shuffle').addEventListener('click', function() {
+        isShuffle = !isShuffle;
+        this.style.color = isShuffle ? '#E29A4A' : '';
+    });
+
+    document.getElementById('btn-repeat').addEventListener('click', function() {
+        isRepeat = !isRepeat;
+        this.style.color = isRepeat ? '#E29A4A' : '';
+        audio.loop = isRepeat;
+    });
+
+    // ── Progresso ──
+    audio.addEventListener('timeupdate', () => {
+        if (!audio.duration) return;
+        const pct = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width  = pct + '%';
+        progressThumb.style.left  = pct + '%';
+        timeCurrent.textContent   = formatTime(audio.currentTime);
+    });
+
+    audio.addEventListener('loadedmetadata', () => {
+        timeTotal.textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('ended', () => {
+        if (!isRepeat) nextTrack();
+    });
+
+    // Clique na barra de progresso
+    progressBar.addEventListener('click', (e) => {
+        if (!audio.duration) return;
+        const rect = progressBar.getBoundingClientRect();
+        const pct  = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = pct * audio.duration;
+    });
+
+    // Drag na barra de progresso
+    let dragging = false;
+    progressBar.addEventListener('mousedown', () => dragging = true);
+    window.addEventListener('mouseup',   () => dragging = false);
+    window.addEventListener('mousemove', (e) => {
+        if (!dragging || !audio.duration) return;
+        const rect = progressBar.getBoundingClientRect();
+        const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        audio.currentTime = pct * audio.duration;
+    });
+
+    // ── Volume ──
+    audio.volume = 0.8;
+    volumeSlider.addEventListener('input', () => {
+        audio.volume = volumeSlider.value;
+        updateVolumeIcon();
+    });
+
+    document.getElementById('btn-mute').addEventListener('click', () => {
+        audio.muted = !audio.muted;
+        updateVolumeIcon();
+    });
+
+    function updateVolumeIcon() {
+        const v = audio.muted ? 0 : audio.volume;
+        if (v === 0)      volumeIcon.className = 'fa-solid fa-volume-xmark';
+        else if (v < 0.5) volumeIcon.className = 'fa-solid fa-volume-low';
+        else              volumeIcon.className = 'fa-solid fa-volume-high';
+    }
+
+    // ── Expõe playTrack para as páginas internas ──
+    // As páginas dentro do iframe podem chamar:
+    // window.parent.playTrack(index)
+    window.playTrack = playTrack;
+    window.getTracks = () => tracks;
+
+    // ── Carrega a faixa inicial (sem tocar) ──
+    if (tracks.length) loadTrack(0);
+
+    // ── Sincroniza navegação do iframe com a URL da shell ──
+    const frame = document.getElementById('site-frame');
+    frame.addEventListener('load', () => {
+        // Mantém o título da aba atualizado
+        try {
+            document.title = frame.contentDocument.title || 'EchoDome';
+        } catch(e) {}
+    });
+    </script>
+
+</body>
+</html>
