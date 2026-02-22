@@ -255,6 +255,145 @@
             .player-volume { display: none; }
             .player-wave { display: none; }
         }
+
+        /* ── BOTÃO LETRA ── */
+        .ctrl-btn.lyrics-btn {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            font-family: 'Bebas Neue', sans-serif;
+            border: 1px solid rgba(226, 154, 74, 0.35);
+            border-radius: 4px;
+            padding: 4px 10px;
+            color: rgba(241, 214, 163, 0.55);
+            transition: all 0.2s;
+        }
+        .ctrl-btn.lyrics-btn:hover {
+            border-color: #E29A4A;
+            color: #E29A4A;
+            background: rgba(226, 154, 74, 0.08);
+            transform: none;
+        }
+        .ctrl-btn.lyrics-btn.active {
+            border-color: #E29A4A;
+            color: #E29A4A;
+            background: rgba(226, 154, 74, 0.12);
+        }
+        .ctrl-btn.lyrics-btn.disabled {
+            opacity: 0.25;
+            pointer-events: none;
+        }
+
+        /* ── MODAL DE LETRA ── */
+        #lyrics-modal {
+            display: none;
+            position: fixed;
+            bottom: 88px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(560px, 92vw);
+            max-height: 60vh;
+            background: rgba(16, 22, 24, 0.97);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(226, 154, 74, 0.25);
+            border-radius: 14px;
+            z-index: 9998;
+            box-shadow: 0 -4px 40px rgba(0,0,0,0.6);
+            flex-direction: column;
+            overflow: hidden;
+            animation: lyricsSlideUp 0.25s ease;
+        }
+
+        #lyrics-modal.open { display: flex; }
+
+        @keyframes lyricsSlideUp {
+            from { opacity: 0; transform: translateX(-50%) translateY(16px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .lyrics-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid rgba(226, 154, 74, 0.12);
+            flex-shrink: 0;
+        }
+
+        .lyrics-header-info { display: flex; flex-direction: column; gap: 2px; }
+
+        .lyrics-header-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            color: #F1D6A3;
+        }
+
+        .lyrics-header-artist {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(241, 214, 163, 0.4);
+        }
+
+        .lyrics-close {
+            background: none;
+            border: none;
+            color: rgba(241, 214, 163, 0.4);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: color 0.2s;
+            border-radius: 4px;
+        }
+        .lyrics-close:hover { color: #E29A4A; }
+
+        .lyrics-body {
+            overflow-y: auto;
+            padding: 20px 24px 24px;
+            flex: 1;
+        }
+
+        .lyrics-body::-webkit-scrollbar { width: 4px; }
+        .lyrics-body::-webkit-scrollbar-track { background: transparent; }
+        .lyrics-body::-webkit-scrollbar-thumb { background: rgba(226,154,74,0.3); border-radius: 2px; }
+
+        .lyrics-text {
+            color: rgba(241, 214, 163, 0.75);
+            font-size: 0.92rem;
+            line-height: 2;
+            white-space: pre-wrap;
+            font-weight: 300;
+        }
+
+        .lyrics-text .lyrics-section {
+            color: #E29A4A;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .lyrics-none {
+            color: rgba(241, 214, 163, 0.3);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 20px 0;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            #lyrics-modal {
+                bottom: 88px;
+                left: 0;
+                right: 0;
+                transform: none;
+                width: 100%;
+                border-radius: 14px 14px 0 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -292,6 +431,9 @@
             <button class="ctrl-btn" id="btn-repeat" title="Repeat">
                 <i class="fa-solid fa-repeat"></i>
             </button>
+            <button class="ctrl-btn lyrics-btn disabled" id="btn-lyrics" title="Lyrics">
+                LETRA
+            </button>
         </div>
 
         <div class="player-progress-wrap">
@@ -312,6 +454,23 @@
                    min="0" max="1" step="0.01" value="0.8">
         </div>
 
+    </div>
+
+
+    <!-- MODAL DE LETRA -->
+    <div id="lyrics-modal">
+        <div class="lyrics-header">
+            <div class="lyrics-header-info">
+                <span class="lyrics-header-title" id="lyrics-modal-title">—</span>
+                <span class="lyrics-header-artist" id="lyrics-modal-artist">EchoDome</span>
+            </div>
+            <button class="lyrics-close" id="lyrics-close" title="Fechar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="lyrics-body">
+            <div class="lyrics-text" id="lyrics-text"></div>
+        </div>
     </div>
 
     <!-- Áudio real -->
@@ -370,6 +529,7 @@
         progressFill.style.width = '0%';
         progressThumb.style.left = '0%';
         timeCurrent.textContent  = '0:00';
+        updateLyricsBtn();
     }
 
     function play() {
@@ -489,6 +649,71 @@
         if (v === 0)      volumeIcon.className = 'fa-solid fa-volume-xmark';
         else if (v < 0.5) volumeIcon.className = 'fa-solid fa-volume-low';
         else              volumeIcon.className = 'fa-solid fa-volume-high';
+    }
+
+
+    // ── Letra da música ──
+    const btnLyrics    = document.getElementById('btn-lyrics');
+    const lyricsModal  = document.getElementById('lyrics-modal');
+    const lyricsTitle  = document.getElementById('lyrics-modal-title');
+    const lyricsArtist = document.getElementById('lyrics-modal-artist');
+    const lyricsText   = document.getElementById('lyrics-text');
+    const lyricsClose  = document.getElementById('lyrics-close');
+
+    function openLyrics() {
+        if (!tracks.length) return;
+        const t = tracks[currentIndex];
+        lyricsTitle.textContent  = t.title;
+        lyricsArtist.textContent = t.artist;
+
+        if (t.lyrics) {
+            // Renderiza seções marcadas com [Verso], [Refrão] etc.
+            const rendered = t.lyrics.replace(
+                /\[([^\]]+)\]/g,
+                '<span class="lyrics-section">$1</span>'
+            );
+            lyricsText.innerHTML = rendered;
+        } else {
+            lyricsText.innerHTML = '<div class="lyrics-none">No lyrics available for this track.</div>';
+        }
+
+        lyricsModal.classList.add('open');
+        btnLyrics.classList.add('active');
+    }
+
+    function closeLyricsModal() {
+        lyricsModal.classList.remove('open');
+        btnLyrics.classList.remove('active');
+    }
+
+    btnLyrics.addEventListener('click', () => {
+        lyricsModal.classList.contains('open') ? closeLyricsModal() : openLyrics();
+    });
+
+    lyricsClose.addEventListener('click', closeLyricsModal);
+
+    // Fecha ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (lyricsModal.classList.contains('open') &&
+            !lyricsModal.contains(e.target) &&
+            e.target !== btnLyrics) {
+            closeLyricsModal();
+        }
+    });
+
+    // Fecha com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeLyricsModal();
+    });
+
+    // Atualiza botão ao trocar de faixa
+    function updateLyricsBtn() {
+        if (!tracks.length) return;
+        const hasLyrics = !!tracks[currentIndex].lyrics;
+        btnLyrics.classList.toggle('disabled', !hasLyrics);
+        // Fecha modal se a nova faixa não tem letra
+        if (!hasLyrics) closeLyricsModal();
+        else if (lyricsModal.classList.contains('open')) openLyrics();
     }
 
     // ── Expõe playTrack para as páginas internas ──
