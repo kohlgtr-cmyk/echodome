@@ -219,7 +219,7 @@ Explodindo em suas mãos`,
         title: "I Feel Stuck",
         artist: "EchoDome",
         duration: "5:01",
-        src: "assets/audio/i-feel-stuck.mp3",
+        src: "assets/audio/i-feel-stuck-copy.mp3",
         cover: "assets/img/logo.jpeg",
         lyrics:`[Verse 1]
 I feel stuck
