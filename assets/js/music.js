@@ -12,15 +12,15 @@ const ECHODOME_TRACKS = [
         src: "assets/audio/love-story.mp3",  // caminho para o arquivo de áudio
         cover: "assets/img/songs/lovestory.png",    // capa do álbum/single
     },
-    /*{
+    {
         id: 2,
-        title: "Untitled 02",
+        title: "Echos Of Yesterday",
         artist: "EchoDome",
-        duration: "4:15",
-        src: "assets/audio/track02.mp3",
+        duration: "4:23",
+        src: "assets/audio/echos.mpeg",
         cover: "assets/img/logo.jpeg",
     },
-    {
+    /*{
         id: 3,
         title: "Untitled 03",
         artist: "EchoDome",
