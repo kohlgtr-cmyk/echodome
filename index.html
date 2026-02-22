@@ -249,11 +249,48 @@
 
         /* Mobile */
         @media (max-width: 600px) {
-            #persistent-player { padding: 0 12px; gap: 10px; }
-            .player-info { width: 100px; }
-            .player-progress-wrap { max-width: none; }
+            #persistent-player {
+                padding: 0 10px;
+                gap: 8px;
+                height: 72px;
+            }
+            .player-cover {
+                width: 40px;
+                height: 40px;
+            }
+            .player-info {
+                width: 90px;
+                min-width: 0;
+            }
+            .player-title { font-size: 0.85rem; }
+            .player-artist { font-size: 0.6rem; }
+            .player-controls { gap: 12px; flex-shrink: 0; }
+            .ctrl-btn { font-size: 0.85rem; padding: 4px; }
+            .ctrl-btn.play-pause {
+                width: 36px;
+                height: 36px;
+                font-size: 0.95rem;
+            }
+            .player-progress-wrap {
+                max-width: none;
+                gap: 6px;
+            }
+            .player-time { font-size: 0.6rem; min-width: 28px; }
             .player-volume { display: none; }
             .player-wave { display: none; }
+            /* esconde shuffle e repeat no mobile pra não encher */
+            #btn-shuffle, #btn-repeat { display: none; }
+            /* esconde botão letra no mobile ou fica pequeno */
+            .ctrl-btn.lyrics-btn {
+                font-size: 0.6rem;
+                padding: 3px 6px;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .player-info { display: none; }
+            .player-controls { gap: 10px; }
         }
 
         /* ── BOTÃO LETRA ── */

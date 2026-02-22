@@ -221,10 +221,13 @@ header::before {
   color: var(--text);
   text-align: center;
   padding-top: 18vh;
+  padding-left: 16px;
+  padding-right: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  overflow: hidden;
 }
 
 .hero-eyebrow {
@@ -238,11 +241,13 @@ header::before {
 
 .hero-title {
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(5rem, 14vw, 11rem);
+  font-size: clamp(3.2rem, 18vw, 11rem);
   line-height: 0.9;
   letter-spacing: 6px;
   display: flex;
   gap: 0.15em;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .hero-line {
@@ -1956,6 +1961,43 @@ header::before {
   }
   .header-menu li {
     padding: 10px 0;
+  }
+  /* Hero mobile */
+  .hero-title {
+    font-size: clamp(2.8rem, 22vw, 5rem);
+    letter-spacing: 2px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+  }
+  .hero-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  .hero-desc br {
+    display: none;
+  }
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-primary, .btn-ghost {
+    width: 220px;
+    text-align: center;
+  }
+  .page {
+    padding-top: 14vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 14px;
   }
   /* Cards mobile */
   .cards-container {

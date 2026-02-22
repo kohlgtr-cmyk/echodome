@@ -104,7 +104,7 @@ header::before {
   backdrop-filter: blur(16px);
   border-bottom: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
 }
 
@@ -120,7 +120,7 @@ header::before {
   padding-bottom: 20px;
   border-bottom: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
   color: var(--gold);
 }
 
@@ -222,10 +222,13 @@ header::before {
   color: var(--text);
   text-align: center;
   padding-top: 18vh;
+  padding-left: 16px;
+  padding-right: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  overflow: hidden;
 }
 
 .hero-eyebrow {
@@ -239,11 +242,13 @@ header::before {
 
 .hero-title {
   font-family: "Bebas Neue", sans-serif;
-  font-size: clamp(5rem, 14vw, 11rem);
+  font-size: clamp(3.2rem, 18vw, 11rem);
   line-height: 0.9;
   letter-spacing: 6px;
   display: flex;
   gap: 0.15em;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .hero-line {
@@ -417,7 +422,7 @@ header::before {
   padding: 80px 50px;
   border-bottom: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
 }
 
 .about-tag {
@@ -454,7 +459,7 @@ header::before {
   padding: 80px 20px;
   border-bottom: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
   background: linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
 }
 
@@ -499,7 +504,7 @@ header::before {
   padding: 80px 40px;
   border-bottom: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
 }
 
 .music-section h1 {
@@ -751,7 +756,7 @@ header::before {
   padding: 80px 40px;
   border-bottom: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
 }
 
 .tour-section h1 {
@@ -995,7 +1000,7 @@ header::before {
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
 }
 
 .form-group input:focus,
@@ -1080,7 +1085,7 @@ header::before {
   text-align: center;
   border-top: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
 }
 
 .footer-bottom {
@@ -1196,9 +1201,9 @@ header::before {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: top center;
-     object-position: top center;
+  object-position: top center;
   display: block;
   transition: transform 0.6s;
 }
@@ -1351,7 +1356,7 @@ header::before {
   padding: 40px 20px;
   border-top: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
 }
 
 .band h1 {
@@ -1396,7 +1401,7 @@ header::before {
   padding: 80px 40px;
   border-top: 2px solid;
   -o-border-image: var(--border);
-     border-image: var(--border);
+  border-image: var(--border);
   color: var(--text);
 }
 
@@ -1441,9 +1446,9 @@ header::before {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: top center;
-     object-position: top center;
+  object-position: top center;
   transition: transform 0.5s;
   display: block;
 }
@@ -1514,7 +1519,7 @@ header::before {
   max-width: 100%;
   max-height: 78vh;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   border-radius: 8px;
   border: 1px solid rgba(226, 154, 74, 0.3);
   transition: opacity 0.15s;
@@ -1636,9 +1641,9 @@ header::before {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: top center;
-     object-position: top center;
+  object-position: top center;
   opacity: 0;
   transition: opacity 0.8s;
 }
@@ -1958,6 +1963,41 @@ header::before {
   .header-menu li {
     padding: 10px 0;
   }
+  /* Hero mobile */
+  .hero-title {
+    font-size: clamp(2.8rem, 22vw, 5rem);
+    letter-spacing: 2px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+  }
+  .hero-desc {
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  .hero-desc br { display: none; }
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-primary, .btn-ghost {
+    width: 220px;
+    text-align: center;
+  }
+  .page {
+    padding-top: 14vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 14px;
+  }
   /* Cards mobile */
   .cards-container {
     display: flex;
@@ -1987,9 +2027,9 @@ header::before {
     height: 60vw !important;
     max-height: 340px !important;
     -o-object-fit: cover !important;
-       object-fit: cover !important;
+    object-fit: cover !important;
     -o-object-position: top center !important;
-       object-position: top center !important;
+    object-position: top center !important;
   }
   .card:hover {
     transform: scale(1.03) !important;
@@ -2075,7 +2115,7 @@ header::before {
     width: 100%;
     height: 260px;
     -o-object-fit: cover;
-       object-fit: cover;
+    object-fit: cover;
   }
   .modal-images img:not(.active) {
     display: none;
@@ -2118,4 +2158,4 @@ header::before {
   .cd-block span {
     font-size: 1.8rem;
   }
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */
