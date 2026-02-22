@@ -17,7 +17,7 @@ const ECHODOME_TRACKS = [
         title: "Echos Of Yesterday",
         artist: "EchoDome",
         duration: "4:23",
-        src: "assets/audio/echos.mpeg",
+        src: "assets/audio/echos.mp3",
         cover: "assets/img/logo.jpeg",
     },
     {
