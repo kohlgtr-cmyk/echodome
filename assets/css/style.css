@@ -1163,7 +1163,7 @@ header::before {
 .members-section {
   padding: 60px 20px;
   text-align: center;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: visible;
 }
 
@@ -1999,24 +1999,36 @@ header::before {
     gap: 14px;
   }
   /* Cards mobile */
+  .members-section {
+    overflow-x: hidden !important;
+    padding: 40px 16px;
+  }
   .cards-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     perspective: none;
     min-height: initial;
     min-width: unset !important;
-    gap: 30px;
+    width: 100% !important;
+    padding: 20px 0;
+    gap: 24px;
+    overflow: visible;
   }
   .card {
     position: relative !important;
     transform: none !important;
     margin: 0 auto;
-    max-width: 600px;
-    width: 90vw;
+    max-width: 480px;
+    width: 100% !important;
     height: auto;
+    left: auto !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
   }
   .card:nth-child(3) {
-    width: 95vw;
+    width: 100% !important;
     height: auto;
   }
   .card-inner {
@@ -2163,3 +2175,191 @@ header::before {
 /* ============================================
    SONGS PAGE
    ============================================ */
+
+/* ── SONGS PAGE ── */
+.songs-hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  background: linear-gradient(to bottom, var(--bg-dark), var(--bg));
+  border-bottom: 2px solid;
+  border-image: var(--border);
+}
+.songs-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: 4px;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.songs-hero p {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+}
+.songs-page { min-height: 100vh; color: var(--text); padding-bottom: 100px; }
+.songs-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  min-height: calc(100vh - 200px);
+}
+/* Lista */
+.songs-list {
+  border-right: 1px solid rgba(226,154,74,0.12);
+  overflow-y: auto;
+  max-height: calc(100vh - 260px);
+  position: sticky;
+  top: 80px;
+}
+.song-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(226,154,74,0.07);
+  transition: background 0.2s;
+  position: relative;
+}
+.song-item:hover { background: rgba(226,154,74,0.05); }
+.song-item.active { background: rgba(226,154,74,0.08); border-left: 3px solid var(--gold); }
+.song-item.active .song-num { color: var(--gold); }
+.song-cover {
+  width: 52px; height: 52px;
+  border-radius: 8px; object-fit: cover;
+  border: 1px solid rgba(226,154,74,0.2);
+  flex-shrink: 0;
+}
+.song-meta { flex: 1; min-width: 0; }
+.song-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem; letter-spacing: 1.5px;
+  color: var(--text);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.song-artist { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase; }
+.song-duration { font-size: 0.7rem; color: var(--text-dim); flex-shrink: 0; }
+.song-num { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: var(--text-dim); width: 20px; text-align: center; flex-shrink: 0; }
+.song-play-btn {
+  position: absolute; left: 56px; top: 50%;
+  transform: translateY(-50%);
+  width: 52px; height: 52px; border-radius: 8px;
+  background: rgba(0,0,0,0.6); border: none;
+  color: white; font-size: 1rem; cursor: pointer;
+  opacity: 0; transition: opacity 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.song-item:hover .song-play-btn { opacity: 1; }
+.song-item.playing .song-play-btn { opacity: 1; background: rgba(226,154,74,0.8); }
+/* Detalhe */
+.song-detail { padding: 40px 48px; overflow-y: auto; }
+.song-detail-empty {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  height: 100%; gap: 16px;
+  color: var(--text-dim); text-align: center; padding: 60px 20px;
+}
+.song-detail-empty i { font-size: 3rem; color: rgba(226,154,74,0.2); }
+.song-detail-empty p { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+.detail-header {
+  display: flex; gap: 28px; align-items: flex-end;
+  margin-bottom: 40px; padding-bottom: 32px;
+  border-bottom: 1px solid rgba(226,154,74,0.12);
+}
+.detail-cover {
+  width: 140px; height: 140px; border-radius: 12px;
+  object-fit: cover; border: 1px solid rgba(226,154,74,0.25);
+  flex-shrink: 0; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.detail-info { flex: 1; }
+.detail-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.detail-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 3px; color: var(--text);
+  margin-bottom: 6px; line-height: 1;
+}
+.detail-artist { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+.detail-play-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold); color: var(--bg-dark);
+  border: none; padding: 10px 24px; border-radius: 24px;
+  font-family: 'Sora', sans-serif; font-size: 0.85rem;
+  font-weight: 700; letter-spacing: 1px;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+}
+.detail-play-btn:hover { background: var(--gold-light); transform: scale(1.03); }
+.detail-play-btn.playing { background: rgba(226,154,74,0.2); color: var(--gold); border: 1px solid var(--gold); }
+/* Tabs */
+.detail-tabs {
+  display: flex; gap: 0; margin-bottom: 32px;
+  border-bottom: 1px solid rgba(226,154,74,0.12);
+}
+.tab-btn {
+  background: none; border: none; color: var(--text-dim);
+  font-family: 'Sora', sans-serif; font-size: 0.78rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 12px 20px; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tab-btn:hover { color: var(--gold-light); }
+.tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+/* Conteúdo das tabs */
+.lyrics-content {
+  font-size: 0.92rem; line-height: 2.1;
+  color: rgba(241,214,163,0.8); white-space: pre-wrap;
+}
+.lyrics-content .ls {
+  display: block; color: var(--gold);
+  font-size: 0.68rem; letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 24px; margin-bottom: 4px;
+}
+.story-content {
+  font-size: 0.95rem; line-height: 1.95;
+  color: rgba(241,214,163,0.75); white-space: pre-wrap;
+}
+.chords-content {
+  font-family: 'Courier New', monospace;
+  font-size: 0.88rem; line-height: 1.9;
+  color: rgba(241,214,163,0.8); white-space: pre; overflow-x: auto;
+  background: rgba(0,0,0,0.2); padding: 24px;
+  border-radius: 10px; border: 1px solid rgba(226,154,74,0.1);
+}
+.chords-content .chord-label {
+  display: block; color: var(--gold);
+  font-size: 0.7rem; letter-spacing: 3px;
+  text-transform: uppercase; margin-top: 20px; margin-bottom: 4px;
+}
+.chords-content .chord { color: #7dffb3; font-weight: bold; }
+/* Mobile songs */
+.mobile-back {
+  display: none; align-items: center; gap: 8px;
+  background: none; border: none; color: var(--gold);
+  font-family: 'Sora', sans-serif; font-size: 0.8rem;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; padding: 0; margin-bottom: 24px;
+}
+.mobile-back i { font-size: 0.75rem; }
+.songs-list::-webkit-scrollbar,
+.song-detail::-webkit-scrollbar { width: 4px; }
+.songs-list::-webkit-scrollbar-track,
+.song-detail::-webkit-scrollbar-track { background: transparent; }
+.songs-list::-webkit-scrollbar-thumb,
+.song-detail::-webkit-scrollbar-thumb { background: rgba(226,154,74,0.25); border-radius: 2px; }
+@media (max-width: 768px) {
+  .songs-layout { grid-template-columns: 1fr; }
+  .songs-list { max-height: none; position: relative; top: 0; border-right: none; border-bottom: 1px solid rgba(226,154,74,0.12); }
+  .song-detail { padding: 24px 20px; }
+  .detail-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .detail-cover { width: 100px; height: 100px; }
+  .song-detail { display: none; }
+  .song-detail.mobile-open {
+    display: block; position: fixed; inset: 0; bottom: 80px;
+    background: var(--bg); z-index: 500;
+    overflow-y: auto; padding: 20px 20px 40px;
+  }
+  .mobile-back { display: flex !important; }
+}
