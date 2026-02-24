@@ -7,8 +7,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Bebas+Neue&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    
     <title>EchoDome</title>
+
     <style>
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -37,8 +40,8 @@
             right: 0;
             height: 80px;
             background: rgba(16, 22, 24, 0.97);
-            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
             border-top: 1px solid rgba(226, 154, 74, 0.25);
             display: flex;
             align-items: center;
@@ -575,6 +578,9 @@
             isPlaying = true;
             playIcon.className = 'fa-solid fa-pause';
             wave.classList.add('active');
+            updateMediaSession();
+            // Notifica páginas internas
+            try { document.getElementById('site-frame').contentWindow.postMessage('player:update', '*'); } catch(e) {}
         }).catch(() => {});
     }
 
@@ -583,6 +589,8 @@
         isPlaying = false;
         playIcon.className = 'fa-solid fa-play';
         wave.classList.remove('active');
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+        try { document.getElementById('site-frame').contentWindow.postMessage('player:update', '*'); } catch(e) {}
     }
 
     function playTrack(index) {
@@ -753,11 +761,37 @@
         else if (lyricsModal.classList.contains('open')) openLyrics();
     }
 
-    // ── Expõe playTrack para as páginas internas ──
-    // As páginas dentro do iframe podem chamar:
-    // window.parent.playTrack(index)
-    window.playTrack = playTrack;
-    window.getTracks = () => tracks;
+
+    // ── Media Session API (notificação do celular) ──
+    function updateMediaSession() {
+        if (!('mediaSession' in navigator)) return;
+        if (!tracks.length) return;
+        const t = tracks[currentIndex];
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title:  t.title,
+            artist: t.artist,
+            album:  'EchoDome',
+            artwork: [
+                { src: t.cover || 'assets/img/logo.jpeg', sizes: '512x512', type: 'image/jpeg' }
+            ]
+        });
+
+        navigator.mediaSession.setActionHandler('play',         () => play());
+        navigator.mediaSession.setActionHandler('pause',        () => pause());
+        navigator.mediaSession.setActionHandler('nexttrack',    () => nextTrack());
+        navigator.mediaSession.setActionHandler('previoustrack',() => prevTrack());
+        navigator.mediaSession.setActionHandler('seekto', (d)  => {
+            if (d.seekTime !== undefined) audio.currentTime = d.seekTime;
+        });
+    }
+
+    // ── Expõe funções para as páginas internas ──
+    window.playTrack       = playTrack;
+    window.pauseTrack      = pause;
+    window.getTracks       = () => tracks;
+    window.getCurrentIndex = () => currentIndex;
+    window.getIsPlaying    = () => isPlaying;
 
     // ── Carrega a faixa inicial (sem tocar) ──
     if (tracks.length) loadTrack(0);

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>EchoDome — Songs</title>
+    </head>
+<body style="padding-bottom: 80px;">
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-ring"></div>
+
+    <!-- NAV -->
+    <header class="band-page-header">
+        <nav class="header-content container">
+            <div class="header-logo">
+                <a href="home.html" style="text-decoration:none;"><h2>EchoDome</h2></a>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="header-menu" id="header-menu">
+                <li><a href="home.html#about"   class="a nav-link">About</a></li>
+                <li><a href="home.html#music"   class="a nav-link">Music</a></li>
+                <li><a href="home.html#tour"    class="a nav-link">Tour</a></li>
+                <li><a href="home.html#contact" class="a nav-link">Contact</a></li>
+                <li><a href="band.html"         class="a nav-link">Band</a></li>
+                <li><a href="songs.html"        class="a nav-link active">Songs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <div class="songs-hero">
+        <div class="section-tag">// Discography</div>
+        <h1>Songs</h1>
+        <p>Every track. Every word. Every story.</p>
+    </div>
+
+    <div class="songs-page">
+        <div class="songs-layout">
+
+            <!-- LISTA DE MÚSICAS -->
+            <aside class="songs-list" id="songs-list">
+                <!-- preenchido pelo JS -->
+            </aside>
+
+            <!-- DETALHE DA MÚSICA -->
+            <section class="song-detail" id="song-detail">
+                <div class="song-detail-empty" id="detail-empty">
+                    <i class="fa-solid fa-music"></i>
+                    <p>Select a song to view details</p>
+                </div>
+                <div id="detail-content" style="display:none;">
+                    <button class="mobile-back" id="mobile-back">
+                        <i class="fa-solid fa-chevron-left"></i> Back
+                    </button>
+
+                    <div class="detail-header">
+                        <img class="detail-cover" id="detail-cover" src="" alt="">
+                        <div class="detail-info">
+                            <div class="detail-tag">EchoDome</div>
+                            <div class="detail-title" id="detail-title">—</div>
+                            <div class="detail-artist" id="detail-artist">—</div>
+                            <button class="detail-play-btn" id="detail-play-btn">
+                                <i class="fa-solid fa-play" id="detail-play-icon"></i>
+                                <span id="detail-play-label">Play</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- TABS -->
+                    <div class="detail-tabs">
+                        <button class="tab-btn active" data-tab="lyrics">Lyrics</button>
+                        <button class="tab-btn" data-tab="story">Story</button>
+                        <button class="tab-btn" data-tab="chords">Chords</button>
+                    </div>
+
+                    <div class="tab-panel active" id="tab-lyrics">
+                        <div class="lyrics-content" id="detail-lyrics"></div>
+                    </div>
+
+                    <div class="tab-panel" id="tab-story">
+                        <div class="story-content" id="detail-story"></div>
+                    </div>
+
+                    <div class="tab-panel" id="tab-chords">
+                        <div class="chords-content" id="detail-chords"></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="assets/js/music.js"></script>
+    <script src="assets/js/songs.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/iframe-nav.js"></script>
+
+    <script>
+    // ── Monta a lista ──
+    const listEl   = document.getElementById('songs-list');
+    const tracks   = typeof ECHODOME_TRACKS !== 'undefined' ? ECHODOME_TRACKS : [];
+    const songData = typeof ECHODOME_SONGS  !== 'undefined' ? ECHODOME_SONGS  : [];
+
+    let activeIndex = null;
+
+    function getSongDetail(id) {
+        return songData.find(s => s.id === id) || {};
+    }
+
+    function isCurrentlyPlaying(index) {
+        try {
+            const p = window.parent;
+            return p && p.getCurrentIndex && p.getCurrentIndex() === index && p.getIsPlaying && p.getIsPlaying();
+        } catch { return false; }
+    }
+
+    // Renderiza lista
+    tracks.forEach((t, i) => {
+        const item = document.createElement('div');
+        item.className = 'song-item';
+        item.dataset.index = i;
+        item.innerHTML = `
+            <span class="song-num">${String(i + 1).padStart(2,'0')}</span>
+            <div style="position:relative; flex-shrink:0;">
+                <img class="song-cover" src="${t.cover || 'assets/img/logo.jpeg'}" alt="${t.title}">
+                <button class="song-play-btn" data-index="${i}" title="Play">
+                    <i class="fa-solid fa-play"></i>
+                </button>
+            </div>
+            <div class="song-meta">
+                <div class="song-name">${t.title}</div>
+                <div class="song-artist">${t.artist}</div>
+            </div>
+            <span class="song-duration">${t.duration || ''}</span>
+        `;
+
+        // Clique no item → abre detalhe
+        item.addEventListener('click', (e) => {
+            if (e.target.closest('.song-play-btn')) return;
+            openDetail(i);
+        });
+
+        // Clique no play → toca no player pai
+        item.querySelector('.song-play-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            playInParent(i);
+        });
+
+        listEl.appendChild(item);
+    });
+
+    // Abre o detalhe de uma faixa
+    function openDetail(index) {
+        activeIndex = index;
+        const t = tracks[index];
+        const sd = getSongDetail(t.id);
+
+        // Marca ativo na lista
+        document.querySelectorAll('.song-item').forEach((el, i) => {
+            el.classList.toggle('active', i === index);
+        });
+
+        // Preenche header
+        document.getElementById('detail-cover').src   = t.cover || 'assets/img/logo.jpeg';
+        document.getElementById('detail-title').textContent  = t.title;
+        document.getElementById('detail-artist').textContent = t.artist;
+
+        // Letra
+        const lyricsEl = document.getElementById('detail-lyrics');
+        if (t.lyrics) {
+            lyricsEl.innerHTML = t.lyrics.replace(/\[([^\]]+)\]/g,
+                '<span class="ls">$1</span>');
+        } else {
+            lyricsEl.innerHTML = '<span style="color:var(--text-dim);font-size:.85rem;letter-spacing:2px;">No lyrics yet.</span>';
+        }
+
+        // História
+        const storyEl = document.getElementById('detail-story');
+        storyEl.textContent = sd.story || 'No story available yet.';
+
+        // Cifra
+        const chordsEl = document.getElementById('detail-chords');
+        if (sd.chords) {
+            // destaca acordes entre colchetes e labels de seção
+            chordsEl.innerHTML = sd.chords
+                .replace(/\[([A-G][^\]]*)\]/g, '<span class="chord">[$1]</span>')
+                .replace(/^(\[(?!.*[a-z])[^\]]+\])$/gm, '<span class="chord-label">$1</span>');
+        } else {
+            chordsEl.innerHTML = '<span style="color:var(--text-dim);font-size:.85rem;letter-spacing:2px;">No chords yet.</span>';
+        }
+
+        // Botão play
+        updateDetailPlayBtn();
+
+        // Mostra conteúdo
+        document.getElementById('detail-empty').style.display   = 'none';
+        document.getElementById('detail-content').style.display = 'block';
+
+        // Mobile: abre como overlay
+        const detail = document.getElementById('song-detail');
+        if (window.innerWidth <= 768) {
+            detail.classList.add('mobile-open');
+        }
+
+        // Reset tabs para lyrics
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector('[data-tab="lyrics"]').classList.add('active');
+        document.getElementById('tab-lyrics').classList.add('active');
+    }
+
+    // Atualiza botão play/pause no detalhe
+    function updateDetailPlayBtn() {
+        if (activeIndex === null) return;
+        const playing = isCurrentlyPlaying(activeIndex);
+        const btn   = document.getElementById('detail-play-btn');
+        const icon  = document.getElementById('detail-play-icon');
+        const label = document.getElementById('detail-play-label');
+        btn.classList.toggle('playing', playing);
+        icon.className  = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+        label.textContent = playing ? 'Pause' : 'Play';
+    }
+
+    // Toca no player pai (iframe parent)
+    function playInParent(index) {
+        try {
+            if (window.parent && window.parent.playTrack) {
+                window.parent.playTrack(index);
+                setTimeout(updateDetailPlayBtn, 300);
+            }
+        } catch(e) {}
+    }
+
+    // Botão play no detalhe
+    document.getElementById('detail-play-btn').addEventListener('click', () => {
+        if (activeIndex === null) return;
+        try {
+            const p = window.parent;
+            if (!p || !p.playTrack) return;
+            const playing = isCurrentlyPlaying(activeIndex);
+            if (playing && p.pauseTrack) {
+                p.pauseTrack();
+            } else {
+                p.playTrack(activeIndex);
+            }
+            setTimeout(updateDetailPlayBtn, 300);
+        } catch(e) {}
+    });
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Botão voltar (mobile)
+    document.getElementById('mobile-back').addEventListener('click', () => {
+        document.getElementById('song-detail').classList.remove('mobile-open');
+    });
+
+    // Ouve eventos do player pai para atualizar o botão play
+    window.addEventListener('message', (e) => {
+        if (e.data === 'player:update') updateDetailPlayBtn();
+    });
+    </script>
+</body>
+</html>

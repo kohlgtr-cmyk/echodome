@@ -100,6 +100,7 @@ header::before {
   width: 100%;
   padding: 20px 25px;
   background: rgba(22, 30, 33, 0.92);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border-bottom: 2px solid;
   -o-border-image: var(--border);
@@ -172,11 +173,11 @@ header::before {
 }
 
 .a:hover::after,
-.a.active::after {
+.a .active::after {
   width: 100%;
 }
 
-.a.active {
+.a .active {
   color: var(--gold-light);
 }
 
@@ -1981,9 +1982,7 @@ header::before {
     font-size: 0.82rem;
     line-height: 1.7;
   }
-  .hero-desc br {
-    display: none;
-  }
+  .hero-desc br { display: none; }
   .hero-cta {
     flex-direction: column;
     align-items: center;
@@ -2160,3 +2159,7 @@ header::before {
     font-size: 1.8rem;
   }
 } /*# sourceMappingURL=style.css.map */
+
+/* ============================================
+   SONGS PAGE
+   ============================================ */
