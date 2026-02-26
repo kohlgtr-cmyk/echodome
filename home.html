@@ -26,32 +26,28 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="header-menu" id="header-menu">
-                <li><a href="#about" class="a nav-link" data-page="index">About</a></li>
-                <li><a href="#music" class="a nav-link" data-page="index">Music</a></li>
-                <li><a href="#tour" class="a nav-link" data-page="index">Tour</a></li>
-                <li><a href="#contact" class="a nav-link" data-page="index">Contact</a></li>
-                <li><a href="band.html" class="a nav-link" data-page="band">Band</a></li>
-                <li><a href="songs.html" class="a nav-link" data-page="songs">Songs</a></li>
+                <li><a href="#about" class="a nav-link" data-page="index" data-i18n="nav.about">About</a></li>
+                <li><a href="#music" class="a nav-link" data-page="index" data-i18n="nav.music">Music</a></li>
+                <li><a href="#tour" class="a nav-link" data-page="index" data-i18n="nav.tour">Tour</a></li>
+                <li><a href="#contact" class="a nav-link" data-page="index" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="band.html" class="a nav-link" data-page="band" data-i18n="nav.band">Band</a></li>
+                <li><a href="songs.html" class="a nav-link" data-page="songs" data-i18n="nav.songs">Songs</a></li>
             </ul>
         </nav>
         <main class="page">
-            <div class="hero-eyebrow">Est. 2022 · ? ? ?</div>
+            <div class="hero-eyebrow" data-i18n="hero.eyebrow">Est. 2022 · ? ? ?</div>
             <h1 class="hero-title">
                 <span class="hero-line" data-delay="0">Echo</span><span class="hero-line hero-line-accent" data-delay="150">Dome</span>
             </h1>
-            <h2 class="hero-subtitle hero-anim" data-delay="300">Rock Band? (we also don't know)</h2>
-            <p class="hero-desc hero-anim" data-delay="500">
-                We are a band that found some excluded musicians —<br>
-                some with a nice background story, others not so nice.<br>
-                Just trying to release the sounds out of the back of our minds.
-            </p>
+            <h2 class="hero-subtitle hero-anim" data-delay="300" data-i18n="hero.subtitle">Rock Band? (we also don't know)</h2>
+            <p class="hero-desc hero-anim" data-delay="500" data-i18n="hero.desc"></p>
             <div class="hero-cta hero-anim" data-delay="700">
-                <a href="#music" class="btn-primary">Listen Now</a>
-                <a href="band.html" class="btn-ghost">Meet the Band</a>
+                <a href="#music" class="btn-primary" data-i18n="hero.listen">Listen Now</a>
+                <a href="band.html" class="btn-ghost" data-i18n="hero.meet">Meet the Band</a>
             </div>
             <div class="hero-scroll-indicator">
                 <span></span>
-                <p>Scroll</p>
+                <p data-i18n="hero.scroll">Scroll</p>
             </div>
         </main>
     </header>
@@ -59,26 +55,22 @@
     <!-- ABOUT -->
     <section class="About" id="about">
         <div class="about-inner">
-            <div class="about-tag">// About Us</div>
-            <h1>Five outcasts.<br>One sound.</h1>
-            <p>Our band was officially founded in July, 2025,
-                but we've been practicing for a couple years now.
-                We listen to various artists, noises in our heads,
-                beating of the hearts — even the little devil and angel on our shoulders.
-            </p>
+            <div class="about-tag" data-i18n="about.tag">// About Us</div>
+            <h1 data-i18n="about.title">Five outcasts.<br>One sound.</h1>
+            <p data-i18n="about.text">Our band was officially founded in July, 2025, but we've been practicing for a couple years now. We listen to various artists, noises in our heads, beating of the hearts — even the little devil and angel on our shoulders.</p>
         </div>
     </section>
 
     <!-- BAND CTA -->
     <section class="band-cta">
-        <h2>Meet the Band</h2>
-        <p>Five outcasts. One sound. Discover the stories behind EchoDome.</p>
-        <a href="band.html" class="btn-band">Meet the Members →</a>
+        <h2 data-i18n="bandcta.title">Meet the Band</h2>
+        <p data-i18n="bandcta.text">Five outcasts. One sound. Discover the stories behind EchoDome.</p>
+        <a href="band.html" class="btn-band" data-i18n="bandcta.btn">Meet the Members →</a>
     </section>
 
     <!-- MUSIC SECTION -->
     <section id="music" class="music-section">
-        <div class="section-tag">// Music</div>
+        <div class="section-tag" data-i18n="music.tag">// Music</div>
         <h1>Our Sound</h1>
 
         <div class="music-coming-soon">
@@ -90,11 +82,11 @@
                 </div>
             </div>
             <div class="music-info">
-                <div class="release-badge">First Release</div>
-                <h2 class="album-title">Untitled EP</h2>
-                <p class="album-desc">Our debut EP is in the making. Born from noise, shaped by silence. Five voices, one frequency.</p>
+                <div class="release-badge" data-i18n="music.badge">First Release</div>
+                <h2 class="album-title" data-i18n="music.albumtitle">Untitled EP</h2>
+                <p class="album-desc" data-i18n="music.albumdesc">Our debut EP is in the making. Born from noise, shaped by silence. Five voices, one frequency.</p>
                 <div class="countdown-wrapper">
-                    <p class="countdown-label">Coming</p>
+                    <p class="countdown-label" data-i18n="music.coming">Coming</p>
                     <div class="countdown-display">
                         <div class="cd-block"><span id="cd-months">??</span><label>Months</label></div>
                         <div class="cd-sep">:</div>
@@ -104,7 +96,7 @@
                     </div>
                 </div>
                 <div class="social-links">
-                    <p>Follow to be notified:</p>
+                    <p data-i18n="music.follow">Follow to be notified:</p>
                     <div class="social-icons">
                         <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -123,15 +115,15 @@
                 <span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span>
             </div>
-            <p class="waveform-label">— Static frequencies until the storm arrives —</p>
+            <p class="waveform-label"><span data-i18n="music.wave">— Static frequencies until the storm arrives —</span></p>
         </div>
     </section>
 
     <!-- TOUR SECTION -->
     <section id="tour" class="tour-section">
-        <div class="section-tag">// Tour</div>
+        <div class="section-tag" data-i18n="tour.tag">// Tour</div>
         <h1>On the Road</h1>
-        <p class="tour-subtitle">Catch us live — if you can find us.</p>
+        <p class="tour-subtitle" data-i18n="tour.subtitle">Catch us live — if you can find us.</p>
 
         <div class="tour-dates">
 
@@ -147,7 +139,7 @@
                 <div class="ticket-right">
                     <div class="ticket-venue">???</div>
                     <div class="ticket-city"><i class="fa-solid fa-location-dot"></i> ???</div>
-                    <div class="ticket-status sold-out-badge">Sold Out</div>
+                    <div class="ticket-status sold-out-badge" data-i18n="tour.soldout">Sold Out</div>
                 </div>
             </div>
 
@@ -163,7 +155,7 @@
                 <div class="ticket-right">
                     <div class="ticket-venue">???</div>
                     <div class="ticket-city"><i class="fa-solid fa-location-dot"></i>???</div>
-                    <div class="ticket-status"><a href="#contact" class="ticket-btn">Get Tickets</a></div>
+                    <div class="ticket-status"><a href="#contact" class="ticket-btn" data-i18n="tour.tickets">Get Tickets</a></div>
                 </div>
             </div>
 
@@ -179,7 +171,7 @@
                 <div class="ticket-right">
                     <div class="ticket-venue">???</div>
                     <div class="ticket-city"><i class="fa-solid fa-location-dot"></i>???</div>
-                    <div class="ticket-status"><a href="#contact" class="ticket-btn">Get Tickets</a></div>
+                    <div class="ticket-status"><a href="#contact" class="ticket-btn" data-i18n="tour.tickets">Get Tickets</a></div>
                 </div>
             </div>
 
@@ -194,8 +186,8 @@
                 <div class="ticket-divider"><span></span><span></span></div>
                 <div class="ticket-right">
                     <div class="ticket-venue">???</div>
-                    <div class="ticket-city"><i class="fa-solid fa-location-dot"></i> Somewhere dark</div>
-                    <div class="ticket-status tba-badge">Stay tuned</div>
+                    <div class="ticket-city"><i class="fa-solid fa-location-dot"></i> <span data-i18n="tour.somewhere">Somewhere dark</span></div>
+                    <div class="ticket-status tba-badge" data-i18n="tour.tba">Stay tuned</div>
                 </div>
             </div>
 
@@ -205,36 +197,36 @@
     <!-- CONTACT / FOOTER -->
     <footer class="footer" id="contact">
         <div class="contact-section">
-            <div class="section-tag">// Contact</div>
-            <h2>Get in Touch</h2>
-            <p class="contact-subtitle">Booking, collabs, or just want to say something? We read everything.</p>
+            <div class="section-tag" data-i18n="contact.tag">// Contact</div>
+            <h2 data-i18n="contact.title">Get in Touch</h2>
+            <p class="contact-subtitle" data-i18n="contact.subtitle">Booking, collabs, or just want to say something? We read everything.</p>
 
             <form class="contact-form" id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required>
+                        <label for="name" data-i18n="contact.name">Name</label>
+                        <input type="text" id="name" name="name" data-i18n="contact.nameph" data-i18n-attr="placeholder" placeholder="Your name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        <label for="email" data-i18n="contact.email">Email</label>
+                        <input type="email" id="email" name="email" data-i18n="contact.emailph" data-i18n-attr="placeholder" placeholder="your@email.com" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="subject">Subject</label>
+                    <label for="subject" data-i18n="contact.subject">Subject</label>
                     <select id="subject" name="subject">
-                        <option value="booking">Booking</option>
-                        <option value="collab">Collaboration</option>
-                        <option value="press">Press / Media</option>
-                        <option value="other">Just saying hi</option>
+                        <option value="booking" data-i18n="contact.booking">Booking</option>
+                        <option value="collab" data-i18n="contact.collab">Collaboration</option>
+                        <option value="press" data-i18n="contact.press">Press / Media</option>
+                        <option value="other" data-i18n="contact.other">Just saying hi</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Write something..." required></textarea>
+                    <label for="message" data-i18n="contact.message">Message</label>
+                    <textarea id="message" name="message" rows="5" data-i18n="contact.messageph" data-i18n-attr="placeholder" placeholder="Write something..." required></textarea>
                 </div>
                 <button type="submit" class="btn-submit">
-                    <span class="btn-text">Send Message</span>
+                    <span class="btn-text" data-i18n="contact.send">Send Message</span>
                     <span class="btn-icon"><i class="fa-solid fa-paper-plane"></i></span>
                 </button>
                 <div class="form-feedback" id="form-feedback"></div>
@@ -249,10 +241,11 @@
                 <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook fa-2x"></i></a>
                 <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify fa-2x"></i></a>
             </div>
-            <p class="footer-copy">© 2025 EchoDome. All rights reserved.</p>
+            <p class="footer-copy" data-i18n="footer.rights">© 2025 EchoDome. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/i18n.js"></script>
 </body>
 </html>

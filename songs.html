@@ -26,21 +26,21 @@
                 <span></span><span></span><span></span>
             </button>
             <ul class="header-menu" id="header-menu">
-                <li><a href="home.html#about"   class="a nav-link">About</a></li>
-                <li><a href="home.html#music"   class="a nav-link">Music</a></li>
-                <li><a href="home.html#tour"    class="a nav-link">Tour</a></li>
-                <li><a href="home.html#contact" class="a nav-link">Contact</a></li>
-                <li><a href="band.html"         class="a nav-link">Band</a></li>
-                <li><a href="songs.html"        class="a nav-link active">Songs</a></li>
+                <li><a href="home.html#about"   class="a nav-link" data-i18n="nav.about">About</a></li>
+                <li><a href="home.html#music"   class="a nav-link" data-i18n="nav.music">Music</a></li>
+                <li><a href="home.html#tour"    class="a nav-link" data-i18n="nav.tour">Tour</a></li>
+                <li><a href="home.html#contact" class="a nav-link" data-i18n="nav.contact">Contact</a></li>
+                <li><a href="band.html"         class="a nav-link" data-i18n="nav.band">Band</a></li>
+                <li><a href="songs.html"        class="a nav-link active" data-i18n="nav.songs">Songs</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- HERO -->
     <div class="songs-hero">
-        <div class="section-tag">// Discography</div>
-        <h1>Songs</h1>
-        <p>Every track. Every word. Every story.</p>
+        <div class="section-tag" data-i18n="songs.tag">// Discography</div>
+        <h1 data-i18n="songs.title">Songs</h1>
+        <p data-i18n="songs.subtitle">Every track. Every word. Every story.</p>
     </div>
 
     <div class="songs-page">
@@ -55,11 +55,11 @@
             <section class="song-detail" id="song-detail">
                 <div class="song-detail-empty" id="detail-empty">
                     <i class="fa-solid fa-music"></i>
-                    <p>Select a song to view details</p>
+                    <p data-i18n="songs.empty">Select a song to view details</p>
                 </div>
                 <div id="detail-content" style="display:none;">
                     <button class="mobile-back" id="mobile-back">
-                        <i class="fa-solid fa-chevron-left"></i> Back
+                        <i class="fa-solid fa-chevron-left"></i> <span data-i18n="songs.back">← Back</span>
                     </button>
 
                     <div class="detail-header">
@@ -77,9 +77,9 @@
 
                     <!-- TABS -->
                     <div class="detail-tabs">
-                        <button class="tab-btn active" data-tab="lyrics">Lyrics</button>
-                        <button class="tab-btn" data-tab="story">Story</button>
-                        <button class="tab-btn" data-tab="chords">Chords</button>
+                        <button class="tab-btn active" data-tab="lyrics" data-i18n="songs.tab.lyrics">Lyrics</button>
+                        <button class="tab-btn" data-tab="story" data-i18n="songs.tab.story">Story</button>
+                        <button class="tab-btn" data-tab="chords" data-i18n="songs.tab.chords">Chords</button>
                     </div>
 
                     <div class="tab-panel active" id="tab-lyrics">
@@ -103,6 +103,7 @@
     <script src="assets/js/songs.js"></script>
     <script src="assets/js/script.js"></script>
     <script src="assets/js/iframe-nav.js"></script>
+    <script src="assets/js/i18n.js"></script>
 
     <script>
     // ── Monta a lista ──
@@ -185,7 +186,7 @@
 
         // História
         const storyEl = document.getElementById('detail-story');
-        storyEl.textContent = sd.story || 'No story available yet.';
+        storyEl.textContent = sd.story || window.I18N ? I18N.t('songs.nostory') : 'No story available yet.';
 
         // Cifra
         const chordsEl = document.getElementById('detail-chords');
@@ -227,7 +228,7 @@
         const label = document.getElementById('detail-play-label');
         btn.classList.toggle('playing', playing);
         icon.className  = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
-        label.textContent = playing ? 'Pause' : 'Play';
+        label.textContent = playing ? (window.I18N ? I18N.t('songs.pause') : 'Pause') : (window.I18N ? I18N.t('songs.play') : 'Play');
     }
 
     // Toca no player pai (iframe parent)

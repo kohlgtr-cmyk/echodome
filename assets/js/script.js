@@ -324,14 +324,14 @@ if (contactForm) {
             });
 
             if (response.ok) {
-                formFeedback.textContent = '✓ Message sent! We\'ll get back to you soon.';
+                formFeedback.textContent = window.I18N ? I18N.t('contact.success') : '✓ Message sent! We\'ll get back to you soon.';
                 formFeedback.className = 'form-feedback success';
                 contactForm.reset();
             } else {
                 throw new Error('Server error');
             }
         } catch {
-            formFeedback.textContent = '✗ Something went wrong. Try emailing us directly.';
+            formFeedback.textContent = window.I18N ? I18N.t('contact.error') : '✗ Something went wrong. Try emailing us directly.';
             formFeedback.className = 'form-feedback error';
         } finally {
             btn.classList.remove('loading');

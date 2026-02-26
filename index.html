@@ -447,7 +447,7 @@
         <img class="player-cover" id="player-cover" src="assets/img/logo.jpeg" alt="cover">
 
         <div class="player-info">
-            <div class="player-title" id="player-title">No track selected</div>
+            <div class="player-title" id="player-title" data-i18n="player.notrack">No track selected</div>
             <div class="player-artist" id="player-artist">EchoDome</div>
         </div>
 
@@ -518,6 +518,7 @@
 
     <!-- Config das músicas -->
     <script src="assets/js/music.js"></script>
+    <script src="assets/js/i18n.js"></script>
 
     <script>
     // ============================================
@@ -796,12 +797,29 @@
     // ── Carrega a faixa inicial (sem tocar) ──
     if (tracks.length) loadTrack(0);
 
+
+    // Propaga idioma para o iframe quando muda
+    const origI18NSet = I18N.set.bind(I18N);
+    I18N.set = function(lang) {
+        origI18NSet(lang);
+        try {
+            const frame = document.getElementById('site-frame');
+            if (frame && frame.contentWindow && frame.contentWindow.I18N) {
+                frame.contentWindow.I18N.set(lang);
+            }
+        } catch(e) {}
+    };
+
+    // Ao carregar iframe, aplica o idioma atual
     // ── Sincroniza navegação do iframe com a URL da shell ──
     const frame = document.getElementById('site-frame');
     frame.addEventListener('load', () => {
-        // Mantém o título da aba atualizado
+        try { document.title = frame.contentDocument.title || 'EchoDome'; } catch(e) {}
+        // Aplica idioma atual no iframe após carregar
         try {
-            document.title = frame.contentDocument.title || 'EchoDome';
+            if (frame.contentWindow.I18N) {
+                frame.contentWindow.I18N.set(I18N.currentLang);
+            }
         } catch(e) {}
     });
     </script>
